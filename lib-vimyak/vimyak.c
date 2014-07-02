@@ -8,28 +8,14 @@
 #include "../keyboard/ergodox/controller/teensy-2-0--led.h"
 #include "../keyboard/ergodox/layout/default--led-control.h"
 
+//modes
+#include "./modes/normal-mode.h"
+#include "./modes/visual-mode.h"
+
 //keycodes for switch
 #include "../lib/usb/usage-page/keyboard.h"
 
-#define _STATE                                               uint8_t
-#define   _NORMAL_MODE                                          0
-#define   _INSERT_MODE                                          1
-#define   _INSERT_MODE_RESET_AFTER_SINGLE_CHAR                  2
-#define   _INSERT_MODE_RESET_AFTER_RETURN                       3
-#define   _INSERT_MODE_RESET_AND_CR_AFTER_SINGLE_CHAR           4
-#define   _VISUAL_MODE_CHAR                                     5
-#define   _VISUAL_MODE_LINE                                     6
-  
-  
-#define _NO_MOD           0
-#define _L_CONTROL        1
-#define _L_SHIFT          2
-#define _L_OPTION         4
-#define _L_COMMAND        8
-#define _R_CONTROL        16
-#define _R_SHIFT          32
-#define _R_OPTION         64
-#define _R_COMMAND        128
+
 
 //I can't use escape to do the normal mode escaping as in traditional
 //--VIM because escape is used for a lot of other things in the OS
@@ -47,6 +33,20 @@ bool _ignore_rest_of_keys;
 
 
 //utility functions
+void set_mode(_STATE mode) {
+  _keyboard_state = mode;
+}
+
+void set_clear_buffer(void) {
+  _flush_keys = true;
+}
+void set_skip_further_commands(void) {
+  _ignore_rest_of_keys = true;
+}
+void set_repeatable_key(void) {
+  _repeating_key = true;
+}
+/*
 void _do_send(uint8_t key, uint8_t modifier)
 {
   keyboard_keys[0] = key;
@@ -59,9 +59,9 @@ void _do_send(uint8_t key, uint8_t modifier)
 	keyboard_modifier_keys = 0;
   //usb_keyboard_send();
 }
-
+*/
 void _handle_sending_of_keys(void) {
-  if (_flush_keys || _ignore_rest_of_keys) {
+  if (_flush_keys) {
     for (uint8_t i=0; i<6; i++) {
       keyboard_keys[i] = 0;
       keyboard_keys_temp[i] = 0;
@@ -175,12 +175,14 @@ void _key_handler(uint8_t* key, uint8_t mod) {
   
   switch (_keyboard_state) {
     case _NORMAL_MODE:
-    if (*key == KEY_i_I) {
-      _keyboard_state = _INSERT_MODE;
-    }
+    normal_mode_loop(*key, mod);
+    //if (*key == KEY_i_I) {
+    //  _keyboard_state = _INSERT_MODE;
+    //}
     break;
     case _INSERT_MODE:
-    _repeating_key = true;
+    set_repeatable_key();
+    //_repeating_key = true;
     break;
   }
   
@@ -219,12 +221,12 @@ void vimyak_keyhandler(void) {
   //--at this stage.
   
 	for (uint8_t i=0; i<6; i++) {
-    _repeating_key = false;
-    if ((!_ignore_rest_of_keys) && (keyboard_keys_temp[i] !=0)) {
-      _pre_command_handler(&keyboard_keys_temp[i], keyboard_modifier_keys_temp);
-      _key_handler(&keyboard_keys_temp[i], keyboard_modifier_keys_temp);      
-      //if (_repeating_key) _register_key(keyboard_keys_temp[i],i);
-      if (!_repeating_key) keyboard_keys_temp[i] = 0;
+    if (keyboard_keys_temp[i] !=0) {
+     if (!_ignore_rest_of_keys)  {
+        _pre_command_handler(&keyboard_keys_temp[i], keyboard_modifier_keys_temp);
+        _key_handler(&keyboard_keys_temp[i], keyboard_modifier_keys_temp);      
+      }
+      else keyboard_keys_temp[i] = 0;
     }
 	}
   _handle_sending_of_keys();

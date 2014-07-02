@@ -1,0 +1,24 @@
+lib-vimyak/modes/mode-utilities.o: lib-vimyak/modes/mode-utilities.c \
+ lib-vimyak/modes/./mode-utilities.h \
+ lib-vimyak/modes/../../lib-other/pjrc/usb_keyboard/usb_keyboard.h \
+ lib-vimyak/modes/../../lib/key-functions/public.h \
+ lib-vimyak/modes/../../main.h lib-vimyak/modes/../.././keyboard/matrix.h \
+ lib-vimyak/modes/../.././keyboard/../lib/variable-include.h \
+ lib-vimyak/modes/../.././keyboard/./ergodox/matrix.h \
+ lib-vimyak/modes/../../lib/usb/usage-page/keyboard.h
+
+lib-vimyak/modes/./mode-utilities.h:
+
+lib-vimyak/modes/../../lib-other/pjrc/usb_keyboard/usb_keyboard.h:
+
+lib-vimyak/modes/../../lib/key-functions/public.h:
+
+lib-vimyak/modes/../../main.h:
+
+lib-vimyak/modes/../.././keyboard/matrix.h:
+
+lib-vimyak/modes/../.././keyboard/../lib/variable-include.h:
+
+lib-vimyak/modes/../.././keyboard/./ergodox/matrix.h:
+
+lib-vimyak/modes/../../lib/usb/usage-page/keyboard.h:

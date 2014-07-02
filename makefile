@@ -47,6 +47,7 @@ SRC += $(wildcard lib-other/*/*/*.c)
 
 #-vimyak additions
 SRC += $(wildcard lib-vimyak/*.c)
+SRC += $(wildcard lib-vimyak/*/*.c)
 #-end vimyak incursion
 
 
