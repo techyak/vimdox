@@ -1,0 +1,5 @@
+lib-other/pjrc/usb_keyboard/usb_keyboard.o: \
+ lib-other/pjrc/usb_keyboard/usb_keyboard.c \
+ lib-other/pjrc/usb_keyboard/usb_keyboard.h
+
+lib-other/pjrc/usb_keyboard/usb_keyboard.h:

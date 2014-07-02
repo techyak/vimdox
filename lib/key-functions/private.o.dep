@@ -1,0 +1,67 @@
+lib/key-functions/private.o: lib/key-functions/private.c \
+ lib/key-functions/../../lib-other/pjrc/usb_keyboard/usb_keyboard.h \
+ lib/key-functions/../../lib/usb/usage-page/keyboard.h \
+ lib/key-functions/../../keyboard/layout.h \
+ lib/key-functions/../../keyboard/../lib/variable-include.h \
+ lib/key-functions/../../keyboard/./ergodox/layout.h \
+ lib/key-functions/../../keyboard/./ergodox/../../lib/variable-include.h \
+ lib/key-functions/../../keyboard/./ergodox/./layout/default--layout.h \
+ lib/key-functions/../../keyboard/./ergodox/./layout/../controller.h \
+ lib/key-functions/../../keyboard/./ergodox/./layout/.././matrix.h \
+ lib/key-functions/../../keyboard/./ergodox/./layout/.././controller/teensy-2-0--led.h \
+ lib/key-functions/../../keyboard/./ergodox/./layout/./default--led-control.h \
+ lib/key-functions/../../keyboard/./ergodox/./layout/./default--matrix-control.h \
+ lib/key-functions/../../keyboard/./ergodox/./layout/./../../../lib/data-types/misc.h \
+ lib/key-functions/../../keyboard/./ergodox/./layout/./../../../lib/key-functions/public.h \
+ lib/key-functions/../../keyboard/./ergodox/./layout/./../matrix.h \
+ lib/key-functions/../../keyboard/matrix.h \
+ lib/key-functions/../../keyboard/./ergodox/matrix.h \
+ lib/key-functions/../../main.h \
+ lib/key-functions/../.././keyboard/matrix.h \
+ lib/key-functions/../.././keyboard/../lib/variable-include.h \
+ lib/key-functions/../.././keyboard/./ergodox/matrix.h \
+ lib/key-functions/./public.h
+
+lib/key-functions/../../lib-other/pjrc/usb_keyboard/usb_keyboard.h:
+
+lib/key-functions/../../lib/usb/usage-page/keyboard.h:
+
+lib/key-functions/../../keyboard/layout.h:
+
+lib/key-functions/../../keyboard/../lib/variable-include.h:
+
+lib/key-functions/../../keyboard/./ergodox/layout.h:
+
+lib/key-functions/../../keyboard/./ergodox/../../lib/variable-include.h:
+
+lib/key-functions/../../keyboard/./ergodox/./layout/default--layout.h:
+
+lib/key-functions/../../keyboard/./ergodox/./layout/../controller.h:
+
+lib/key-functions/../../keyboard/./ergodox/./layout/.././matrix.h:
+
+lib/key-functions/../../keyboard/./ergodox/./layout/.././controller/teensy-2-0--led.h:
+
+lib/key-functions/../../keyboard/./ergodox/./layout/./default--led-control.h:
+
+lib/key-functions/../../keyboard/./ergodox/./layout/./default--matrix-control.h:
+
+lib/key-functions/../../keyboard/./ergodox/./layout/./../../../lib/data-types/misc.h:
+
+lib/key-functions/../../keyboard/./ergodox/./layout/./../../../lib/key-functions/public.h:
+
+lib/key-functions/../../keyboard/./ergodox/./layout/./../matrix.h:
+
+lib/key-functions/../../keyboard/matrix.h:
+
+lib/key-functions/../../keyboard/./ergodox/matrix.h:
+
+lib/key-functions/../../main.h:
+
+lib/key-functions/../.././keyboard/matrix.h:
+
+lib/key-functions/../.././keyboard/../lib/variable-include.h:
+
+lib/key-functions/../.././keyboard/./ergodox/matrix.h:
+
+lib/key-functions/./public.h:

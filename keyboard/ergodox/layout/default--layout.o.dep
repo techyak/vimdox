@@ -1,0 +1,49 @@
+keyboard/ergodox/layout/default--layout.o: \
+ keyboard/ergodox/layout/default--layout.c \
+ keyboard/ergodox/layout/../../../lib/data-types/misc.h \
+ keyboard/ergodox/layout/../../../lib/usb/usage-page/keyboard--short-names.h \
+ keyboard/ergodox/layout/../../../lib/usb/usage-page/./keyboard.h \
+ keyboard/ergodox/layout/../../../lib/key-functions/public.h \
+ keyboard/ergodox/layout/../matrix.h keyboard/ergodox/layout/../layout.h \
+ keyboard/ergodox/layout/../../../lib/variable-include.h \
+ keyboard/ergodox/layout/.././layout/default--layout.h \
+ keyboard/ergodox/layout/.././layout/../controller.h \
+ keyboard/ergodox/layout/.././layout/.././matrix.h \
+ keyboard/ergodox/layout/.././layout/.././controller/teensy-2-0--led.h \
+ keyboard/ergodox/layout/.././layout/./default--led-control.h \
+ keyboard/ergodox/layout/.././layout/./default--matrix-control.h \
+ keyboard/ergodox/layout/.././layout/./../../../lib/data-types/misc.h \
+ keyboard/ergodox/layout/.././layout/./../../../lib/key-functions/public.h \
+ keyboard/ergodox/layout/.././layout/./../matrix.h
+
+keyboard/ergodox/layout/../../../lib/data-types/misc.h:
+
+keyboard/ergodox/layout/../../../lib/usb/usage-page/keyboard--short-names.h:
+
+keyboard/ergodox/layout/../../../lib/usb/usage-page/./keyboard.h:
+
+keyboard/ergodox/layout/../../../lib/key-functions/public.h:
+
+keyboard/ergodox/layout/../matrix.h:
+
+keyboard/ergodox/layout/../layout.h:
+
+keyboard/ergodox/layout/../../../lib/variable-include.h:
+
+keyboard/ergodox/layout/.././layout/default--layout.h:
+
+keyboard/ergodox/layout/.././layout/../controller.h:
+
+keyboard/ergodox/layout/.././layout/.././matrix.h:
+
+keyboard/ergodox/layout/.././layout/.././controller/teensy-2-0--led.h:
+
+keyboard/ergodox/layout/.././layout/./default--led-control.h:
+
+keyboard/ergodox/layout/.././layout/./default--matrix-control.h:
+
+keyboard/ergodox/layout/.././layout/./../../../lib/data-types/misc.h:
+
+keyboard/ergodox/layout/.././layout/./../../../lib/key-functions/public.h:
+
+keyboard/ergodox/layout/.././layout/./../matrix.h:

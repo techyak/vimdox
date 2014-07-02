@@ -1,0 +1,4 @@
+lib/key-functions/public/device.o: lib/key-functions/public/device.c \
+ lib/key-functions/public/../public.h
+
+lib/key-functions/public/../public.h:

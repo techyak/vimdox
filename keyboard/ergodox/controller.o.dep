@@ -1,0 +1,13 @@
+keyboard/ergodox/controller.o: keyboard/ergodox/controller.c \
+ keyboard/ergodox/./matrix.h \
+ keyboard/ergodox/./controller/mcp23018--functions.h \
+ keyboard/ergodox/./controller/../matrix.h \
+ keyboard/ergodox/./controller/teensy-2-0--functions.h
+
+keyboard/ergodox/./matrix.h:
+
+keyboard/ergodox/./controller/mcp23018--functions.h:
+
+keyboard/ergodox/./controller/../matrix.h:
+
+keyboard/ergodox/./controller/teensy-2-0--functions.h:

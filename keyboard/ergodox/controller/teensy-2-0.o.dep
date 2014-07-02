@@ -1,0 +1,26 @@
+keyboard/ergodox/controller/teensy-2-0.o: \
+ keyboard/ergodox/controller/teensy-2-0.c \
+ keyboard/ergodox/controller/../../../lib/twi.h \
+ keyboard/ergodox/controller/../../../lib/../lib/variable-include.h \
+ keyboard/ergodox/controller/../../../lib/./twi/teensy-2-0.h \
+ keyboard/ergodox/controller/../options.h \
+ keyboard/ergodox/controller/../matrix.h \
+ keyboard/ergodox/controller/./teensy-2-0--functions.h \
+ keyboard/ergodox/controller/./../matrix.h \
+ keyboard/ergodox/controller/./teensy-2-0--led.h
+
+keyboard/ergodox/controller/../../../lib/twi.h:
+
+keyboard/ergodox/controller/../../../lib/../lib/variable-include.h:
+
+keyboard/ergodox/controller/../../../lib/./twi/teensy-2-0.h:
+
+keyboard/ergodox/controller/../options.h:
+
+keyboard/ergodox/controller/../matrix.h:
+
+keyboard/ergodox/controller/./teensy-2-0--functions.h:
+
+keyboard/ergodox/controller/./../matrix.h:
+
+keyboard/ergodox/controller/./teensy-2-0--led.h:

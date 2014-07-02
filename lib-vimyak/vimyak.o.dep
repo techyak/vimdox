@@ -1,0 +1,29 @@
+lib-vimyak/vimyak.o: lib-vimyak/vimyak.c \
+ lib-vimyak/../lib-other/pjrc/usb_keyboard/usb_keyboard.h \
+ lib-vimyak/../lib/key-functions/public.h lib-vimyak/../main.h \
+ lib-vimyak/.././keyboard/matrix.h \
+ lib-vimyak/.././keyboard/../lib/variable-include.h \
+ lib-vimyak/.././keyboard/./ergodox/matrix.h lib-vimyak/./vimyak.h \
+ lib-vimyak/../keyboard/ergodox/controller/teensy-2-0--led.h \
+ lib-vimyak/../keyboard/ergodox/layout/default--led-control.h \
+ lib-vimyak/../lib/usb/usage-page/keyboard.h
+
+lib-vimyak/../lib-other/pjrc/usb_keyboard/usb_keyboard.h:
+
+lib-vimyak/../lib/key-functions/public.h:
+
+lib-vimyak/../main.h:
+
+lib-vimyak/.././keyboard/matrix.h:
+
+lib-vimyak/.././keyboard/../lib/variable-include.h:
+
+lib-vimyak/.././keyboard/./ergodox/matrix.h:
+
+lib-vimyak/./vimyak.h:
+
+lib-vimyak/../keyboard/ergodox/controller/teensy-2-0--led.h:
+
+lib-vimyak/../keyboard/ergodox/layout/default--led-control.h:
+
+lib-vimyak/../lib/usb/usage-page/keyboard.h:
