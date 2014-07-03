@@ -299,4 +299,45 @@ void __do_scroll_down(void) {
   __do_send(KEY_F13, my_modifiers);    
 }
 
+void __do_insert_space(void) {
+  __do_send(KEY_Spacebar, 0);
+}
+
+void __go_page_down(bool select) {
+  my_modifiers = 0;
+  if (select) {
+    my_modifiers |= (1<<1);
+  }
+  __do_send(KEY_PageDown, my_modifiers);  
+}
+void __go_page_up(bool select) {
+  my_modifiers = 0;
+  if (select) {
+    my_modifiers |= (1<<1);
+  }
+  __do_send(KEY_PageUp, my_modifiers);
+}
+
+void __go_end_of_file(bool select) {
+  my_modifiers = 0;
+  if (select) {
+    my_modifiers |= (1<<1);
+  }
+  __do_send(KEY_End, my_modifiers);
+}
+
+void __go_beginning_of_file(bool select) {
+  my_modifiers = 0;
+  if (select) {
+    my_modifiers |= (1<<1);
+  }
+  __do_send(KEY_Home, my_modifiers);  
+}
+
+
+void __do_select_all_file(void) {
+  my_modifiers = 0;
+  my_modifiers |= (1<<3);
+  __do_send(KEY_a_A, my_modifiers);
+}
 //end utility functions

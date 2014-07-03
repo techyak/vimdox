@@ -48,6 +48,12 @@ void __do_left_word(bool select);
 void __do_right_word(bool select);
 void __do_scroll_up(void);
 void __do_scroll_down(void);
+void __do_insert_space(void);
+void __go_page_down(bool select);
+void __go_page_up(bool select);
+void __go_end_of_file(bool select);
+void __go_beginning_of_file(bool select);
+void __do_select_all_file(void); 
 //end utility functions
 
 #endif

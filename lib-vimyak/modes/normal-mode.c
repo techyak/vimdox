@@ -6,7 +6,13 @@
 //keycodes for switch
 #include "../../lib/usb/usage-page/keyboard.h"
 
+//repeater #defines/vars
+uint8_t repeater_index;
+#define _SR_ repeater_index=1; while(repeater_index<repeater) {__do_send(0,0);  //start repeater loop
+#define _ER_ repeater_index++; } //end repeater loop
+
 uint8_t my_modifiers;
+
 //a
 void _do_append(uint8_t repeater) {
   my_modifiers = 0;
@@ -34,25 +40,23 @@ void _do_previous_word(uint8_t repeater) {
 
 //^b
 void _do_page_down(uint8_t repeater) {
-  my_modifiers = 0;
-  my_modifiers |= (1<<1);
-  my_modifiers |= (1<<2);
-  my_modifiers |= (1<<3);  
-  __do_send(KEY_F13, my_modifiers);
-
-  
+  __go_page_down(false);
 }
   
 
 //cc
 void _do_change_line(uint8_t repeater) {
+  
   __go_beginning_of_line(false);
+  
+  _SR_
+  __do_down(true); 
+  _ER_
+    
   __go_end_of_line(true);
   __do_copy_selection();
-  __go_soft_beginning_of_line();
-  __go_end_of_line(true);
-  __do_delete_backwards();
   
+  __do_delete_backwards();   
   
 }
 
@@ -84,11 +88,29 @@ void _do_delete_all_word(uint8_t repeater) {
 
 //dd
 void _do_delete_line(uint8_t repeater) {
-  my_modifiers = 0;
-  my_modifiers |= (1<<0);
-  my_modifiers |= (1<<2);
-  __do_send(KEY_F13, my_modifiers);
+  __do_set_mark();
+  __go_beginning_of_line(false);
   
+  _SR_
+  __do_down(true); 
+  _ER_
+    
+  __go_end_of_line(true);
+  __do_copy_selection();
+  __do_swap_with_mark();
+  
+  __do_insert_space();
+  __go_beginning_of_line(false);
+  
+  _SR_
+  __do_down(true); 
+  _ER_
+    
+  __go_end_of_line(true);
+  __do_copy_selection();  
+  __do_delete_backwards(); 
+  __do_send(0,0); 
+  __do_delete_backwards();   
 }
 
 //dw
@@ -109,14 +131,20 @@ void _do_end_word(uint8_t repeater) {
 
 //^f
 void _do_page_up(uint8_t repeater) {
-  my_modifiers = 0;
-  my_modifiers |= (1<<1);
-  my_modifiers |= (1<<3);  
-  __do_send(KEY_F13, my_modifiers);
-
-  
+  __go_page_up(false);
 }
 
+//G
+void _do_end_of_file(uint8_t repeater) {
+  __do_select_all_file();
+  __do_right(false);
+}
+
+//gg
+void _do_beginning_of_file(uint8_t repeater) {
+  __do_select_all_file();
+  __do_left(false);
+}
 
 //I
 void _do_insert_soft_beginning_of_line(uint8_t repeater) {
@@ -257,13 +285,16 @@ void _do_next_word(uint8_t repeater) {
 
 //yy
 void _do_copy_line(uint8_t repeater) {
-  __do_set_mark();
+  __do_set_mark();  
   __go_beginning_of_line(false);
+  
+  _SR_
+  __do_down(true); 
+  _ER_
+    
   __go_end_of_line(true);
-  __do_copy_selection();
+  __do_copy_selection();  
   __do_swap_with_mark();
-  
-  
 }
 
 //yaw 
@@ -367,20 +398,6 @@ void _single_key_handler_hack(uint8_t repeater) {
 void _command_handler(void(*FunctPtr)(uint8_t)) {
 
   (*FunctPtr)(_get_repeater());
-  /*
-  if (!repeatable) _repeater = 0;
-  
-  //WE MAY NEED ANOTHER CHECK FOR NON NORMAL MODE REPEATING>>>...
-  if (_repeater <= 1) {
-    _repeater = 0;
-  } else {
-    for (uint8_t i=1; i < _repeater; i++) {
-      __do_send(0,0); //it turns out (discovered after much hair pulling) that you need a no-op call in between keypresses
-      (*FunctPtr)();
-    }
-    _repeater = 0;
-  }
-  */
   _reset_repeater();
   _do_command_reset();
 }
@@ -526,13 +543,29 @@ void __d(uint8_t key, uint8_t mod) {
   }
 }
 
+
+
+void __g(uint8_t key, uint8_t mod) {
+  switch (key) {
+    case KEY_g_G:
+    
+    case _NO_MOD: //gg
+    _command_handler(&_do_beginning_of_file);
+    _NOTHING;  
+    
+    default:
+    _NOTHING_RESET
+  }
+}
+
+
 void __ya(uint8_t key, uint8_t mod) {
   switch (key) {
     case KEY_w_W:
     
     case _NO_MOD: //yaw
     _command_handler(&_do_copy_all_word);
-    _NOTHING;  
+    _NOTHING; 
     
     default:
     _NOTHING_RESET
@@ -708,7 +741,6 @@ void _empty_command(uint8_t key, uint8_t mod) {
        
       default:
       _NOTHING_RESET
-      break;
     }
     break;
     
@@ -865,6 +897,22 @@ void _empty_command(uint8_t key, uint8_t mod) {
       _NOTHING_RESET
     }
     
+		case KEY_g_G:    
+    switch (mod) {
+      case _L_SHIFT: //G
+      case _R_SHIFT:
+      _command_handler(&_do_end_of_file);
+      _NOTHING
+      
+      case _NO_MOD: //g     
+      _set_command_function(&__g);
+      _NOTHING
+      
+      default:
+      _NOTHING_RESET
+    }
+		break;
+        
 		case KEY_h_H:    
     switch (mod) {
       case _NO_MOD: //h
@@ -980,11 +1028,11 @@ void _empty_command(uint8_t key, uint8_t mod) {
       case _L_SHIFT: //P
       case _R_SHIFT:
       _command_handler(&_do_paste_previous_line);
-      break;
+      _NOTHING
               
       case _NO_MOD: //p
       _command_handler(&_do_paste);
-      break;
+      _NOTHING
     
       default:
       _NOTHING_RESET
@@ -997,7 +1045,7 @@ void _empty_command(uint8_t key, uint8_t mod) {
       _command_handler(&_do_select_next_char);
       //_exit_function = &_do_back_one_char;
       _set_state(_INSERT_MODE_RESET_AFTER_SINGLE_CHAR);
-      break;
+      _NOTHING
     
       default:
       _NOTHING_RESET
@@ -1014,7 +1062,7 @@ void _empty_command(uint8_t key, uint8_t mod) {
       case _NO_MOD: //s
       _command_handler(&_subst_char);
       _set_state(_INSERT_MODE);
-      break;
+      _NOTHING
     
       default:
       _NOTHING_RESET
@@ -1024,7 +1072,7 @@ void _empty_command(uint8_t key, uint8_t mod) {
     switch (mod) {
       case _NO_MOD: //u
       _command_handler(&_do_undo);
-      break;
+      _NOTHING
     
       default:
       _NOTHING_RESET
@@ -1036,11 +1084,11 @@ void _empty_command(uint8_t key, uint8_t mod) {
       case _L_SHIFT: //S
       case _R_SHIFT:
       _set_state(_VISUAL_MODE_LINE);
-      break;
+      _NOTHING
       
       case _NO_MOD: //s
       _set_state(_VISUAL_MODE_CHAR);
-      break;
+      _NOTHING
     
       default:
       _NOTHING_RESET
@@ -1051,7 +1099,7 @@ void _empty_command(uint8_t key, uint8_t mod) {
       case _NO_MOD: //w
       set_repeatable_modified_key();    
       _command_handler(&_do_next_word);
-      _NOTHING;
+      _NOTHING
           
       default:
       _NOTHING_RESET
@@ -1061,14 +1109,14 @@ void _empty_command(uint8_t key, uint8_t mod) {
     switch (mod) {
       case _L_SHIFT: //X
       case _R_SHIFT:
-      set_repeatable_modified_key();    
+      set_repeatable_modified_key();
       _single_key_command(KEY_DeleteBackspace, 0);
-      break;
+      _NOTHING
       
       case _NO_MOD: //x
       set_repeatable_modified_key();      
       _single_key_command(KEY_DeleteForward, 0);
-      break;
+      _NOTHING
     
       default:
       _NOTHING_RESET
@@ -1079,7 +1127,7 @@ void _empty_command(uint8_t key, uint8_t mod) {
       case _L_COMMAND:
       case _R_COMMAND:
       _command_handler(&_do_copy_selection);
-      break;
+      _NOTHING
       
       case _NO_MOD: //y   
       _set_command_function(&__y);
@@ -1096,7 +1144,7 @@ void _empty_command(uint8_t key, uint8_t mod) {
       case _NO_MOD: // /
       _command_handler(&_do_find);
       _set_state(_INSERT_MODE_RESET_AFTER_RETURN);
-      break;
+      _NOTHING
     
       default:
       _NOTHING_RESET
@@ -1123,7 +1171,7 @@ void _empty_command(uint8_t key, uint8_t mod) {
       case _NO_MOD: // /
       _command_handler(&_do_command_space);
       _set_state(_INSERT_MODE_RESET_AFTER_RETURN);
-      break;
+      _NOTHING
     
       default:
       _NOTHING_RESET
@@ -1135,7 +1183,7 @@ void _empty_command(uint8_t key, uint8_t mod) {
       case _NO_MOD: // /
       _command_handler(&_do_command_option_f);
       _set_state(_INSERT_MODE_RESET_AFTER_RETURN);
-      break;
+      _NOTHING
     
       default:
       _NOTHING_RESET
@@ -1150,7 +1198,7 @@ void _empty_command(uint8_t key, uint8_t mod) {
     
     set_repeatable_key();
     //set_skip_further_commands();
-    break;
+    _NOTHING
     
     default:
     _NOTHING_RESET

@@ -34,6 +34,7 @@ __key               0x1               lib-vimyak/modes/normal-mode.o
 _keyboard_state     0x1               lib-vimyak/vimyak.o
 main_arg_is_pressed
                     0x1               main.o
+repeater_index      0x1               lib-vimyak/modes/normal-mode.o
 _repeater           0x1               lib-vimyak/modes/mode-utilities.o
 _ignore_rest_of_keys
                     0x1               lib-vimyak/vimyak.o
@@ -135,13 +136,13 @@ Discarded input sections
  .text.__do_select_line
                 0x0000000000000000        0xe lib-vimyak/modes/mode-utilities.o
  .text.__do_up  0x0000000000000000       0x1a lib-vimyak/modes/mode-utilities.o
- .text.__do_down
+ .text.__go_end_of_file
                 0x0000000000000000       0x1a lib-vimyak/modes/mode-utilities.o
- .text.__do_right
+ .text.__go_beginning_of_file
                 0x0000000000000000       0x1a lib-vimyak/modes/mode-utilities.o
- .rodata.CSWTCH.50
+ .rodata.CSWTCH.60
                 0x0000000000000000        0xa lib-vimyak/modes/mode-utilities.o
- .rodata.CSWTCH.53
+ .rodata.CSWTCH.63
                 0x0000000000000000        0xa lib-vimyak/modes/mode-utilities.o
  .text          0x0000000000000000        0x0 lib-vimyak/modes/normal-mode.o
  .bss           0x0000000000000000        0x0 lib-vimyak/modes/normal-mode.o
@@ -328,7 +329,7 @@ LOAD /usr/local/Cellar/avr-gcc/4.7.2/lib/gcc/avr/4.7.2/avr5/libgcc.a
 .rela.plt
  *(.rela.plt)
 
-.text           0x0000000000000000     0x2ae2
+.text           0x0000000000000000     0x2c38
  *(.vectors)
  .vectors       0x0000000000000000       0xac /usr/local/Cellar/avr-gcc/4.7.2/lib/gcc/avr/4.7.2/../../../../avr/lib/avr5/crtm32u4.o
                 0x0000000000000000                __vectors
@@ -645,178 +646,204 @@ LOAD /usr/local/Cellar/avr-gcc/4.7.2/lib/gcc/avr/4.7.2/avr5/libgcc.a
  .text.__do_swap_with_mark
                 0x00000000000024b0        0xc lib-vimyak/modes/mode-utilities.o
                 0x00000000000024b0                __do_swap_with_mark
- .text.__do_left
+ .text.__do_down
                 0x00000000000024bc       0x18 lib-vimyak/modes/mode-utilities.o
-                0x00000000000024bc                __do_left
+                0x00000000000024bc                __do_down
+ .text.__do_left
+                0x00000000000024d4       0x18 lib-vimyak/modes/mode-utilities.o
+                0x00000000000024d4                __do_left
+ .text.__do_right
+                0x00000000000024ec       0x18 lib-vimyak/modes/mode-utilities.o
+                0x00000000000024ec                __do_right
  .text.__do_left_word
-                0x00000000000024d4       0x1e lib-vimyak/modes/mode-utilities.o
-                0x00000000000024d4                __do_left_word
+                0x0000000000002504       0x1e lib-vimyak/modes/mode-utilities.o
+                0x0000000000002504                __do_left_word
  .text.__do_right_word
-                0x00000000000024f2       0x1e lib-vimyak/modes/mode-utilities.o
-                0x00000000000024f2                __do_right_word
+                0x0000000000002522       0x1e lib-vimyak/modes/mode-utilities.o
+                0x0000000000002522                __do_right_word
  .text.__do_scroll_up
-                0x0000000000002510        0xc lib-vimyak/modes/mode-utilities.o
-                0x0000000000002510                __do_scroll_up
+                0x0000000000002540        0xc lib-vimyak/modes/mode-utilities.o
+                0x0000000000002540                __do_scroll_up
  .text.__do_scroll_down
-                0x000000000000251c        0xc lib-vimyak/modes/mode-utilities.o
-                0x000000000000251c                __do_scroll_down
+                0x000000000000254c        0xc lib-vimyak/modes/mode-utilities.o
+                0x000000000000254c                __do_scroll_down
+ .text.__do_insert_space
+                0x0000000000002558        0x6 lib-vimyak/modes/mode-utilities.o
+                0x0000000000002558                __do_insert_space
+ .text.__go_page_down
+                0x000000000000255e       0x18 lib-vimyak/modes/mode-utilities.o
+                0x000000000000255e                __go_page_down
+ .text.__go_page_up
+                0x0000000000002576       0x18 lib-vimyak/modes/mode-utilities.o
+                0x0000000000002576                __go_page_up
+ .text.__do_select_all_file
+                0x000000000000258e        0xc lib-vimyak/modes/mode-utilities.o
+                0x000000000000258e                __do_select_all_file
  .text._single_key_handler_hack
-                0x0000000000002528        0xa lib-vimyak/modes/normal-mode.o
-                0x0000000000002528                _single_key_handler_hack
+                0x000000000000259a        0xa lib-vimyak/modes/normal-mode.o
+                0x000000000000259a                _single_key_handler_hack
  .text._do_command_option_f
-                0x0000000000002532        0xc lib-vimyak/modes/normal-mode.o
-                0x0000000000002532                _do_command_option_f
+                0x00000000000025a4        0xc lib-vimyak/modes/normal-mode.o
+                0x00000000000025a4                _do_command_option_f
  .text._do_command_space
-                0x000000000000253e        0xc lib-vimyak/modes/normal-mode.o
-                0x000000000000253e                _do_command_space
+                0x00000000000025b0        0xc lib-vimyak/modes/normal-mode.o
+                0x00000000000025b0                _do_command_space
  .text._do_save
-                0x000000000000254a        0xc lib-vimyak/modes/normal-mode.o
-                0x000000000000254a                _do_save
+                0x00000000000025bc        0xc lib-vimyak/modes/normal-mode.o
+                0x00000000000025bc                _do_save
  .text._do_quit
-                0x0000000000002556        0xc lib-vimyak/modes/normal-mode.o
-                0x0000000000002556                _do_quit
+                0x00000000000025c8        0xc lib-vimyak/modes/normal-mode.o
+                0x00000000000025c8                _do_quit
  .text._do_end_of_line
-                0x0000000000002562        0xc lib-vimyak/modes/normal-mode.o
-                0x0000000000002562                _do_end_of_line
+                0x00000000000025d4        0xc lib-vimyak/modes/normal-mode.o
+                0x00000000000025d4                _do_end_of_line
  .text._do_hard_beginning_of_line
-                0x000000000000256e        0xc lib-vimyak/modes/normal-mode.o
-                0x000000000000256e                _do_hard_beginning_of_line
+                0x00000000000025e0        0xc lib-vimyak/modes/normal-mode.o
+                0x00000000000025e0                _do_hard_beginning_of_line
  .text._do_find
-                0x000000000000257a        0xc lib-vimyak/modes/normal-mode.o
-                0x000000000000257a                _do_find
+                0x00000000000025ec        0xc lib-vimyak/modes/normal-mode.o
+                0x00000000000025ec                _do_find
  .text._do_undo
-                0x0000000000002586        0xc lib-vimyak/modes/normal-mode.o
-                0x0000000000002586                _do_undo
+                0x00000000000025f8        0xc lib-vimyak/modes/normal-mode.o
+                0x00000000000025f8                _do_undo
  .text._subst_char
-                0x0000000000002592        0xa lib-vimyak/modes/normal-mode.o
-                0x0000000000002592                _subst_char
+                0x0000000000002604        0xa lib-vimyak/modes/normal-mode.o
+                0x0000000000002604                _subst_char
  .text._do_select_next_char
-                0x000000000000259c        0xc lib-vimyak/modes/normal-mode.o
-                0x000000000000259c                _do_select_next_char
+                0x000000000000260e        0xc lib-vimyak/modes/normal-mode.o
+                0x000000000000260e                _do_select_next_char
  .text._do_paste_previous_line
-                0x00000000000025a8       0x2e lib-vimyak/modes/normal-mode.o
-                0x00000000000025a8                _do_paste_previous_line
+                0x000000000000261a       0x2e lib-vimyak/modes/normal-mode.o
+                0x000000000000261a                _do_paste_previous_line
  .text._do_paste
-                0x00000000000025d6       0x2e lib-vimyak/modes/normal-mode.o
-                0x00000000000025d6                _do_paste
+                0x0000000000002648       0x2e lib-vimyak/modes/normal-mode.o
+                0x0000000000002648                _do_paste
  .text._do_open_line_below
-                0x0000000000002604       0x16 lib-vimyak/modes/normal-mode.o
-                0x0000000000002604                _do_open_line_below
+                0x0000000000002676       0x16 lib-vimyak/modes/normal-mode.o
+                0x0000000000002676                _do_open_line_below
  .text._do_next_find_backward
-                0x000000000000261a        0xa lib-vimyak/modes/normal-mode.o
-                0x000000000000261a                _do_next_find_backward
+                0x000000000000268c        0xa lib-vimyak/modes/normal-mode.o
+                0x000000000000268c                _do_next_find_backward
  .text._do_next_find_forward
-                0x0000000000002624        0xc lib-vimyak/modes/normal-mode.o
-                0x0000000000002624                _do_next_find_forward
- .text._do_page_up
-                0x0000000000002630        0xc lib-vimyak/modes/normal-mode.o
-                0x0000000000002630                _do_page_up
- .text._do_delete_line
-                0x000000000000263c        0xc lib-vimyak/modes/normal-mode.o
-                0x000000000000263c                _do_delete_line
- .text._do_page_down
-                0x0000000000002648        0xc lib-vimyak/modes/normal-mode.o
-                0x0000000000002648                _do_page_down
+                0x0000000000002696        0xc lib-vimyak/modes/normal-mode.o
+                0x0000000000002696                _do_next_find_forward
  .text._do_append_eol
-                0x0000000000002654        0xc lib-vimyak/modes/normal-mode.o
-                0x0000000000002654                _do_append_eol
+                0x00000000000026a2        0xc lib-vimyak/modes/normal-mode.o
+                0x00000000000026a2                _do_append_eol
  .text._do_append
-                0x0000000000002660        0xa lib-vimyak/modes/normal-mode.o
-                0x0000000000002660                _do_append
+                0x00000000000026ae        0xa lib-vimyak/modes/normal-mode.o
+                0x00000000000026ae                _do_append
  .text._do_soft_beginning_of_line
-                0x000000000000266a        0x2 lib-vimyak/modes/normal-mode.o
-                0x000000000000266a                _do_soft_beginning_of_line
+                0x00000000000026b8        0x2 lib-vimyak/modes/normal-mode.o
+                0x00000000000026b8                _do_soft_beginning_of_line
  .text._do_open_line_above
-                0x000000000000266c       0x16 lib-vimyak/modes/normal-mode.o
-                0x000000000000266c                _do_open_line_above
+                0x00000000000026ba       0x16 lib-vimyak/modes/normal-mode.o
+                0x00000000000026ba                _do_open_line_above
  .text._do_insert_soft_beginning_of_line
-                0x0000000000002682        0x2 lib-vimyak/modes/normal-mode.o
-                0x0000000000002682                _do_insert_soft_beginning_of_line
+                0x00000000000026d0        0x2 lib-vimyak/modes/normal-mode.o
+                0x00000000000026d0                _do_insert_soft_beginning_of_line
  .text._do_copy_selection
-                0x0000000000002684        0x2 lib-vimyak/modes/normal-mode.o
-                0x0000000000002684                _do_copy_selection
+                0x00000000000026d2        0x2 lib-vimyak/modes/normal-mode.o
+                0x00000000000026d2                _do_copy_selection
  .text._do_next_word
-                0x0000000000002686        0x4 lib-vimyak/modes/normal-mode.o
-                0x0000000000002686                _do_next_word
+                0x00000000000026d4        0x4 lib-vimyak/modes/normal-mode.o
+                0x00000000000026d4                _do_next_word
  .text._do_copy_word
-                0x000000000000268a        0xa lib-vimyak/modes/normal-mode.o
-                0x000000000000268a                _do_copy_word
+                0x00000000000026d8        0xa lib-vimyak/modes/normal-mode.o
+                0x00000000000026d8                _do_copy_word
  .text._do_end_word
-                0x0000000000002694        0xc lib-vimyak/modes/normal-mode.o
-                0x0000000000002694                _do_end_word
+                0x00000000000026e2        0xc lib-vimyak/modes/normal-mode.o
+                0x00000000000026e2                _do_end_word
  .text._do_delete_all_word
-                0x00000000000026a0        0xc lib-vimyak/modes/normal-mode.o
-                0x00000000000026a0                _do_delete_all_word
+                0x00000000000026ee        0xc lib-vimyak/modes/normal-mode.o
+                0x00000000000026ee                _do_delete_all_word
  .text._do_copy_all_word
-                0x00000000000026ac        0x8 lib-vimyak/modes/normal-mode.o
-                0x00000000000026ac                _do_copy_all_word
+                0x00000000000026fa        0x8 lib-vimyak/modes/normal-mode.o
+                0x00000000000026fa                _do_copy_all_word
  .text._do_copy_line
-                0x00000000000026b4        0xe lib-vimyak/modes/normal-mode.o
-                0x00000000000026b4                _do_copy_line
+                0x0000000000002702       0x38 lib-vimyak/modes/normal-mode.o
+                0x0000000000002702                _do_copy_line
  .text._do_scroll_down
-                0x00000000000026c2        0x2 lib-vimyak/modes/normal-mode.o
-                0x00000000000026c2                _do_scroll_down
+                0x000000000000273a        0x2 lib-vimyak/modes/normal-mode.o
+                0x000000000000273a                _do_scroll_down
  .text._do_scroll_up
-                0x00000000000026c4        0x2 lib-vimyak/modes/normal-mode.o
-                0x00000000000026c4                _do_scroll_up
+                0x000000000000273c        0x2 lib-vimyak/modes/normal-mode.o
+                0x000000000000273c                _do_scroll_up
+ .text._do_beginning_of_file
+                0x000000000000273e        0x6 lib-vimyak/modes/normal-mode.o
+                0x000000000000273e                _do_beginning_of_file
+ .text._do_end_of_file
+                0x0000000000002744        0x6 lib-vimyak/modes/normal-mode.o
+                0x0000000000002744                _do_end_of_file
+ .text._do_page_up
+                0x000000000000274a        0x4 lib-vimyak/modes/normal-mode.o
+                0x000000000000274a                _do_page_up
  .text._do_delete_word
-                0x00000000000026c6        0x6 lib-vimyak/modes/normal-mode.o
-                0x00000000000026c6                _do_delete_word
+                0x000000000000274e        0x6 lib-vimyak/modes/normal-mode.o
+                0x000000000000274e                _do_delete_word
  .text._do_change_word
-                0x00000000000026cc        0x6 lib-vimyak/modes/normal-mode.o
-                0x00000000000026cc                _do_change_word
+                0x0000000000002754        0x6 lib-vimyak/modes/normal-mode.o
+                0x0000000000002754                _do_change_word
  .text._do_change_all_word
-                0x00000000000026d2        0x6 lib-vimyak/modes/normal-mode.o
-                0x00000000000026d2                _do_change_all_word
+                0x000000000000275a        0x6 lib-vimyak/modes/normal-mode.o
+                0x000000000000275a                _do_change_all_word
  .text._do_change_line
-                0x00000000000026d8       0x12 lib-vimyak/modes/normal-mode.o
-                0x00000000000026d8                _do_change_line
+                0x0000000000002760       0x36 lib-vimyak/modes/normal-mode.o
+                0x0000000000002760                _do_change_line
+ .text._do_delete_line
+                0x0000000000002796       0x72 lib-vimyak/modes/normal-mode.o
+                0x0000000000002796                _do_delete_line
+ .text._do_page_down
+                0x0000000000002808        0x4 lib-vimyak/modes/normal-mode.o
+                0x0000000000002808                _do_page_down
  .text._do_previous_word
-                0x00000000000026ea        0x4 lib-vimyak/modes/normal-mode.o
-                0x00000000000026ea                _do_previous_word
- .text.__colon  0x00000000000026ee       0x20 lib-vimyak/modes/normal-mode.o
-                0x00000000000026ee                __colon
+                0x000000000000280c        0x4 lib-vimyak/modes/normal-mode.o
+                0x000000000000280c                _do_previous_word
+ .text.__colon  0x0000000000002810       0x20 lib-vimyak/modes/normal-mode.o
+                0x0000000000002810                __colon
  .text._command_handler
-                0x000000000000270e       0x14 lib-vimyak/modes/normal-mode.o
-                0x000000000000270e                _command_handler
+                0x0000000000002830       0x14 lib-vimyak/modes/normal-mode.o
+                0x0000000000002830                _command_handler
  .text.__colon_w
-                0x0000000000002722       0x10 lib-vimyak/modes/normal-mode.o
-                0x0000000000002722                __colon_w
+                0x0000000000002844       0x10 lib-vimyak/modes/normal-mode.o
+                0x0000000000002844                __colon_w
  .text.__colon_q
-                0x0000000000002732       0x10 lib-vimyak/modes/normal-mode.o
-                0x0000000000002732                __colon_q
- .text.__y      0x0000000000002742       0x2c lib-vimyak/modes/normal-mode.o
-                0x0000000000002742                __y
- .text.__ya     0x000000000000276e       0x10 lib-vimyak/modes/normal-mode.o
-                0x000000000000276e                __ya
- .text.__d      0x000000000000277e       0x2c lib-vimyak/modes/normal-mode.o
-                0x000000000000277e                __d
- .text.__da     0x00000000000027aa       0x10 lib-vimyak/modes/normal-mode.o
-                0x00000000000027aa                __da
- .text.__c      0x00000000000027ba       0x30 lib-vimyak/modes/normal-mode.o
-                0x00000000000027ba                __c
- .text.__ca     0x00000000000027ea       0x14 lib-vimyak/modes/normal-mode.o
-                0x00000000000027ea                __ca
+                0x0000000000002854       0x10 lib-vimyak/modes/normal-mode.o
+                0x0000000000002854                __colon_q
+ .text.__y      0x0000000000002864       0x2c lib-vimyak/modes/normal-mode.o
+                0x0000000000002864                __y
+ .text.__ya     0x0000000000002890       0x10 lib-vimyak/modes/normal-mode.o
+                0x0000000000002890                __ya
+ .text.__g      0x00000000000028a0       0x10 lib-vimyak/modes/normal-mode.o
+                0x00000000000028a0                __g
+ .text.__d      0x00000000000028b0       0x2c lib-vimyak/modes/normal-mode.o
+                0x00000000000028b0                __d
+ .text.__da     0x00000000000028dc       0x10 lib-vimyak/modes/normal-mode.o
+                0x00000000000028dc                __da
+ .text.__c      0x00000000000028ec       0x30 lib-vimyak/modes/normal-mode.o
+                0x00000000000028ec                __c
+ .text.__ca     0x000000000000291c       0x14 lib-vimyak/modes/normal-mode.o
+                0x000000000000291c                __ca
  .text._single_key_command
-                0x00000000000027fe        0xe lib-vimyak/modes/normal-mode.o
-                0x00000000000027fe                _single_key_command
+                0x0000000000002930        0xe lib-vimyak/modes/normal-mode.o
+                0x0000000000002930                _single_key_command
  .text._empty_command
-                0x000000000000280c      0x2ae lib-vimyak/modes/normal-mode.o
-                0x000000000000280c                _empty_command
+                0x000000000000293e      0x2d2 lib-vimyak/modes/normal-mode.o
+                0x000000000000293e                _empty_command
  .text.normal_mode_loop
-                0x0000000000002aba        0xa lib-vimyak/modes/normal-mode.o
-                0x0000000000002aba                normal_mode_loop
+                0x0000000000002c10        0xa lib-vimyak/modes/normal-mode.o
+                0x0000000000002c10                normal_mode_loop
  .text.normal_mode_set_command_function
-                0x0000000000002ac4        0xe lib-vimyak/modes/normal-mode.o
-                0x0000000000002ac4                normal_mode_set_command_function
- .text.libgcc   0x0000000000002ad2        0xc /usr/local/Cellar/avr-gcc/4.7.2/lib/gcc/avr/4.7.2/avr5/libgcc.a(_tablejump.o)
-                0x0000000000002ad2                __tablejump2__
-                0x0000000000002ad6                __tablejump__
-                0x0000000000002ade                . = ALIGN (0x2)
+                0x0000000000002c1a        0xe lib-vimyak/modes/normal-mode.o
+                0x0000000000002c1a                normal_mode_set_command_function
+ .text.libgcc   0x0000000000002c28        0xc /usr/local/Cellar/avr-gcc/4.7.2/lib/gcc/avr/4.7.2/avr5/libgcc.a(_tablejump.o)
+                0x0000000000002c28                __tablejump2__
+                0x0000000000002c2c                __tablejump__
+                0x0000000000002c34                . = ALIGN (0x2)
  *(.fini9)
- .fini9         0x0000000000002ade        0x0 /usr/local/Cellar/avr-gcc/4.7.2/lib/gcc/avr/4.7.2/avr5/libgcc.a(_exit.o)
-                0x0000000000002ade                exit
-                0x0000000000002ade                _exit
+ .fini9         0x0000000000002c34        0x0 /usr/local/Cellar/avr-gcc/4.7.2/lib/gcc/avr/4.7.2/avr5/libgcc.a(_exit.o)
+                0x0000000000002c34                exit
+                0x0000000000002c34                _exit
  *(.fini9)
  *(.fini8)
  *(.fini8)
@@ -835,11 +862,11 @@ LOAD /usr/local/Cellar/avr-gcc/4.7.2/lib/gcc/avr/4.7.2/avr5/libgcc.a
  *(.fini1)
  *(.fini1)
  *(.fini0)
- .fini0         0x0000000000002ade        0x4 /usr/local/Cellar/avr-gcc/4.7.2/lib/gcc/avr/4.7.2/avr5/libgcc.a(_exit.o)
+ .fini0         0x0000000000002c34        0x4 /usr/local/Cellar/avr-gcc/4.7.2/lib/gcc/avr/4.7.2/avr5/libgcc.a(_exit.o)
  *(.fini0)
-                0x0000000000002ae2                _etext = .
+                0x0000000000002c38                _etext = .
 
-.data           0x0000000000800100       0x1a load address 0x0000000000002ae2
+.data           0x0000000000800100       0x1a load address 0x0000000000002c38
                 0x0000000000800100                PROVIDE (__data_start, .)
  *(.data)
  .data          0x0000000000800100        0x0 /usr/local/Cellar/avr-gcc/4.7.2/lib/gcc/avr/4.7.2/../../../../avr/lib/avr5/crtm32u4.o
@@ -884,7 +911,7 @@ LOAD /usr/local/Cellar/avr-gcc/4.7.2/lib/gcc/avr/4.7.2/avr5/libgcc.a
                 0x000000000080011a                _edata = .
                 0x000000000080011a                PROVIDE (__data_end, .)
 
-.bss            0x000000000080011a      0x162
+.bss            0x000000000080011a      0x163
                 0x000000000080011a                PROVIDE (__bss_start, .)
  *(.bss)
  *(.bss*)
@@ -943,19 +970,20 @@ LOAD /usr/local/Cellar/avr-gcc/4.7.2/lib/gcc/avr/4.7.2/avr5/libgcc.a
  COMMON         0x0000000000800278        0x2 lib-vimyak/modes/mode-utilities.o
                 0x0000000000800278                my_modifiers
                 0x0000000000800279                _repeater
- COMMON         0x000000000080027a        0x2 lib-vimyak/modes/normal-mode.o
+ COMMON         0x000000000080027a        0x3 lib-vimyak/modes/normal-mode.o
                 0x000000000080027a                __modifier
                 0x000000000080027b                __key
-                0x000000000080027c                PROVIDE (__bss_end, .)
-                0x0000000000002ae2                __data_load_start = LOADADDR (.data)
-                0x0000000000002afc                __data_load_end = (__data_load_start + SIZEOF (.data))
+                0x000000000080027c                repeater_index
+                0x000000000080027d                PROVIDE (__bss_end, .)
+                0x0000000000002c38                __data_load_start = LOADADDR (.data)
+                0x0000000000002c52                __data_load_end = (__data_load_start + SIZEOF (.data))
 
-.noinit         0x000000000080027c        0x0
-                0x000000000080027c                PROVIDE (__noinit_start, .)
+.noinit         0x000000000080027d        0x0
+                0x000000000080027d                PROVIDE (__noinit_start, .)
  *(.noinit*)
-                0x000000000080027c                PROVIDE (__noinit_end, .)
-                0x000000000080027c                _end = .
-                0x000000000080027c                PROVIDE (__heap_start, .)
+                0x000000000080027d                PROVIDE (__noinit_end, .)
+                0x000000000080027d                _end = .
+                0x000000000080027d                PROVIDE (__heap_start, .)
 
 .eeprom         0x0000000000810000        0x0
  *(.eeprom*)
@@ -1121,16 +1149,22 @@ __do_delay                                        lib-vimyak/modes/mode-utilitie
 __do_delete_backwards                             lib-vimyak/modes/mode-utilities.o
                                                   lib-vimyak/modes/normal-mode.o
 __do_down                                         lib-vimyak/modes/mode-utilities.o
+                                                  lib-vimyak/modes/normal-mode.o
+__do_insert_space                                 lib-vimyak/modes/mode-utilities.o
+                                                  lib-vimyak/modes/normal-mode.o
 __do_left                                         lib-vimyak/modes/mode-utilities.o
                                                   lib-vimyak/modes/normal-mode.o
 __do_left_word                                    lib-vimyak/modes/mode-utilities.o
                                                   lib-vimyak/modes/normal-mode.o
 __do_right                                        lib-vimyak/modes/mode-utilities.o
+                                                  lib-vimyak/modes/normal-mode.o
 __do_right_word                                   lib-vimyak/modes/mode-utilities.o
                                                   lib-vimyak/modes/normal-mode.o
 __do_scroll_down                                  lib-vimyak/modes/mode-utilities.o
                                                   lib-vimyak/modes/normal-mode.o
 __do_scroll_up                                    lib-vimyak/modes/mode-utilities.o
+                                                  lib-vimyak/modes/normal-mode.o
+__do_select_all_file                              lib-vimyak/modes/mode-utilities.o
                                                   lib-vimyak/modes/normal-mode.o
 __do_select_all_word                              lib-vimyak/modes/mode-utilities.o
                                                   lib-vimyak/modes/normal-mode.o
@@ -1142,9 +1176,16 @@ __do_set_mark                                     lib-vimyak/modes/mode-utilitie
 __do_swap_with_mark                               lib-vimyak/modes/mode-utilities.o
                                                   lib-vimyak/modes/normal-mode.o
 __do_up                                           lib-vimyak/modes/mode-utilities.o
+__g                                               lib-vimyak/modes/normal-mode.o
+__go_beginning_of_file                            lib-vimyak/modes/mode-utilities.o
 __go_beginning_of_line                            lib-vimyak/modes/mode-utilities.o
                                                   lib-vimyak/modes/normal-mode.o
+__go_end_of_file                                  lib-vimyak/modes/mode-utilities.o
 __go_end_of_line                                  lib-vimyak/modes/mode-utilities.o
+                                                  lib-vimyak/modes/normal-mode.o
+__go_page_down                                    lib-vimyak/modes/mode-utilities.o
+                                                  lib-vimyak/modes/normal-mode.o
+__go_page_up                                      lib-vimyak/modes/mode-utilities.o
                                                   lib-vimyak/modes/normal-mode.o
 __go_soft_beginning_of_line                       lib-vimyak/modes/mode-utilities.o
                                                   lib-vimyak/modes/normal-mode.o
@@ -1212,6 +1253,7 @@ _command_handler                                  lib-vimyak/modes/normal-mode.o
 _do_append                                        lib-vimyak/modes/normal-mode.o
 _do_append_eol                                    lib-vimyak/modes/normal-mode.o
 _do_back_one_char                                 lib-vimyak/modes/normal-mode.o
+_do_beginning_of_file                             lib-vimyak/modes/normal-mode.o
 _do_change_all_word                               lib-vimyak/modes/normal-mode.o
 _do_change_line                                   lib-vimyak/modes/normal-mode.o
 _do_change_word                                   lib-vimyak/modes/normal-mode.o
@@ -1227,6 +1269,7 @@ _do_copy_word                                     lib-vimyak/modes/normal-mode.o
 _do_delete_all_word                               lib-vimyak/modes/normal-mode.o
 _do_delete_line                                   lib-vimyak/modes/normal-mode.o
 _do_delete_word                                   lib-vimyak/modes/normal-mode.o
+_do_end_of_file                                   lib-vimyak/modes/normal-mode.o
 _do_end_of_line                                   lib-vimyak/modes/normal-mode.o
 _do_end_word                                      lib-vimyak/modes/normal-mode.o
 _do_find                                          lib-vimyak/modes/normal-mode.o
@@ -1404,6 +1447,7 @@ normal_mode_loop                                  lib-vimyak/modes/normal-mode.o
                                                   lib-vimyak/vimyak.o
 normal_mode_set_command_function                  lib-vimyak/modes/normal-mode.o
                                                   lib-vimyak/modes/mode-utilities.o
+repeater_index                                    lib-vimyak/modes/normal-mode.o
 set_clear_buffer                                  lib-vimyak/vimyak.o
 set_keyboard_state                                lib-vimyak/vimyak.o
                                                   lib-vimyak/modes/mode-utilities.o
