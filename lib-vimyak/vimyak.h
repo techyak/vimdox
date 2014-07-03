@@ -27,9 +27,12 @@
 void vimyak_init(void);
 void vimyak_keyhandler(void);
 
-void set_mode(_STATE mode);
 void set_clear_buffer(void);
 void set_skip_further_commands(void);
 void set_repeatable_key(void);
+void set_repeatable_modified_key(void);
+
+_STATE get_keyboard_state(void);
+void set_keyboard_state(_STATE new_state);
   
 #endif

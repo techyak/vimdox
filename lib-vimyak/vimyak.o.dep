@@ -6,6 +6,7 @@ lib-vimyak/vimyak.o: lib-vimyak/vimyak.c \
  lib-vimyak/.././keyboard/./ergodox/matrix.h lib-vimyak/./vimyak.h \
  lib-vimyak/../keyboard/ergodox/controller/teensy-2-0--led.h \
  lib-vimyak/../keyboard/ergodox/layout/default--led-control.h \
+ lib-vimyak/./modes/mode-utilities.h lib-vimyak/./modes/../vimyak.h \
  lib-vimyak/./modes/normal-mode.h lib-vimyak/./modes/visual-mode.h \
  lib-vimyak/../lib/usb/usage-page/keyboard.h
 
@@ -26,6 +27,10 @@ lib-vimyak/./vimyak.h:
 lib-vimyak/../keyboard/ergodox/controller/teensy-2-0--led.h:
 
 lib-vimyak/../keyboard/ergodox/layout/default--led-control.h:
+
+lib-vimyak/./modes/mode-utilities.h:
+
+lib-vimyak/./modes/../vimyak.h:
 
 lib-vimyak/./modes/normal-mode.h:
 

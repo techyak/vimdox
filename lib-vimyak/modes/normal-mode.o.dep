@@ -1,11 +1,13 @@
 lib-vimyak/modes/normal-mode.o: lib-vimyak/modes/normal-mode.c \
  lib-vimyak/modes/./normal-mode.h lib-vimyak/modes/./mode-utilities.h \
- lib-vimyak/modes/../vimyak.h \
+ lib-vimyak/modes/./../vimyak.h lib-vimyak/modes/../vimyak.h \
  lib-vimyak/modes/../../lib/usb/usage-page/keyboard.h
 
 lib-vimyak/modes/./normal-mode.h:
 
 lib-vimyak/modes/./mode-utilities.h:
+
+lib-vimyak/modes/./../vimyak.h:
 
 lib-vimyak/modes/../vimyak.h:
 

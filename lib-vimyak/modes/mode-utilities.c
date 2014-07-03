@@ -110,6 +110,42 @@ void __debug_num(uint8_t num) {
 
 //end debug functions
 
+
+//shared command function/vars
+void _set_command_function(void(*FunctPtr)(uint8_t, uint8_t)) {
+  _command_function = FunctPtr;
+}
+
+void _set_state(_STATE new_state) {
+  set_keyboard_state(new_state);
+  switch (new_state) {
+    case _NORMAL_MODE:
+    normal_mode_set_command_function();
+    break;
+  }
+}
+
+void _do_command_reset(void) {
+  _set_state(_NORMAL_MODE);
+}
+//end shared command functions/vars
+
+//repeater functions
+uint8_t _repeater;
+
+void _repeater_addition(uint8_t adder) {
+  _repeater = (_repeater * 10) + adder;
+  if (_repeater > 20) { _repeater = 20; } //maybe change later, but this is a safety valve...
+}
+void _reset_repeater(void) {
+  _repeater = 0;
+}
+uint8_t _get_repeater(void) {
+  return _repeater;
+}
+//end repeater functions
+
+
 //keycode sending functions
 void __do_delay(void) {
 	_delay_ms(MAKEFILE_DEBOUNCE_TIME);

@@ -9,6 +9,7 @@
 #include "../keyboard/ergodox/layout/default--led-control.h"
 
 //modes
+#include "./modes/mode-utilities.h"
 #include "./modes/normal-mode.h"
 #include "./modes/visual-mode.h"
 
@@ -26,6 +27,7 @@ _STATE _keyboard_state;
 _STATE _previous_state;
 bool _keypress_message_sent;
 bool _repeating_key;
+bool _repeating_modified_key;
 
 
 bool _flush_keys; 
@@ -33,8 +35,16 @@ bool _ignore_rest_of_keys;
 
 
 //utility functions
-void set_mode(_STATE mode) {
-  _keyboard_state = mode;
+//void set_mode(_STATE mode) {
+//  _keyboard_state = mode;
+//}
+
+
+_STATE get_keyboard_state(void) {
+  return _keyboard_state;
+}
+void set_keyboard_state(_STATE new_state) { 
+  _keyboard_state = new_state;
 }
 
 void set_clear_buffer(void) {
@@ -45,6 +55,10 @@ void set_skip_further_commands(void) {
 }
 void set_repeatable_key(void) {
   _repeating_key = true;
+}
+
+void set_repeatable_modified_key(void) {
+  _repeating_modified_key = true;
 }
 /*
 void _do_send(uint8_t key, uint8_t modifier)
@@ -161,6 +175,7 @@ void _LEDhandler(void) {
 
 void _vimyak_reset(void) {
   _keyboard_state = _NORMAL_MODE;  
+  _do_command_reset();
 }
 
 void vimyak_init(void) {
@@ -170,29 +185,23 @@ void vimyak_init(void) {
   
 }
 
-void _key_handler(uint8_t* key, uint8_t mod) {
+void _key_handler(uint8_t key, uint8_t mod) {
   _repeating_key = false;
+  _repeating_modified_key = false;
   
   switch (_keyboard_state) {
     case _NORMAL_MODE:
-    normal_mode_loop(*key, mod);
-    //if (*key == KEY_i_I) {
-    //  _keyboard_state = _INSERT_MODE;
-    //}
+    normal_mode_loop(key, mod);
     break;
     case _INSERT_MODE:
     set_repeatable_key();
-    //_repeating_key = true;
     break;
-  }
-  
-  if (!_repeating_key) {
-    *key = 0;
-  }
+  }  
 }
 
-void _pre_command_handler(uint8_t* key, uint8_t mod) {
-  if (*key == _RESETKEY) {
+void _pre_command_handler(uint8_t key, uint8_t mod) {
+  //pre command handling without reference to keyboard_state
+  if (key == _RESETKEY) {
     _vimyak_reset();
     _ignore_rest_of_keys = true;    
   }
@@ -223,13 +232,14 @@ void vimyak_keyhandler(void) {
 	for (uint8_t i=0; i<6; i++) {
     if (keyboard_keys_temp[i] !=0) {
      if (!_ignore_rest_of_keys)  {
-        _pre_command_handler(&keyboard_keys_temp[i], keyboard_modifier_keys_temp);
-        _key_handler(&keyboard_keys_temp[i], keyboard_modifier_keys_temp);      
+        _pre_command_handler(keyboard_keys_temp[i], keyboard_modifier_keys_temp);
+        _key_handler(keyboard_keys_temp[i], keyboard_modifier_keys_temp);
+        if ((!_repeating_key) && (!_repeating_modified_key)) keyboard_keys_temp[i] = 0;      
       }
       else keyboard_keys_temp[i] = 0;
     }
 	}
-  _handle_sending_of_keys();
+  if (!_repeating_modified_key) _handle_sending_of_keys();
   
   _LEDhandler();
 }
