@@ -120,8 +120,11 @@ void _set_state(_STATE new_state) {
   set_keyboard_state(new_state);
   switch (new_state) {
     case _NORMAL_MODE:
-    normal_mode_set_command_function();
-    break;
+    normal_mode_setup(); 
+    _NOTHING
+    case _VISUAL_MODE_LINE:
+    visual_mode_line_setup();
+    _NOTHING
   }
 }
 

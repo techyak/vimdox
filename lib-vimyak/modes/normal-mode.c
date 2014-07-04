@@ -421,10 +421,6 @@ KEY_RightGUI: (1<<7)
 */
 
 
-
-#define _NOTHING return; break;
-#define _NOTHING_RESET _do_command_reset(); return; break;
-
 void __ca(uint8_t key, uint8_t mod) {
   switch (key) {
     
@@ -1230,6 +1226,6 @@ void normal_mode_loop(uint8_t key, uint8_t mod) {
     */
 }
 
-void normal_mode_set_command_function(void) {
+void normal_mode_setup(void) {
   _command_function = &_empty_command;
 }

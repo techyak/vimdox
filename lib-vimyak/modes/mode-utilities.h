@@ -56,4 +56,7 @@ void __go_beginning_of_file(bool select);
 void __do_select_all_file(void); 
 //end utility functions
 
+
+#define _NOTHING return; break;
+#define _NOTHING_RESET _do_command_reset(); return; break;
 #endif

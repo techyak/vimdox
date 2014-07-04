@@ -176,6 +176,8 @@ void _LEDhandler(void) {
 void _vimyak_reset(void) {
   _keyboard_state = _NORMAL_MODE;  
   _do_command_reset();
+  _visual_mode_reset();
+  _reset_repeater();
 }
 
 void vimyak_init(void) {
@@ -192,10 +194,13 @@ void _key_handler(uint8_t key, uint8_t mod) {
   switch (_keyboard_state) {
     case _NORMAL_MODE:
     normal_mode_loop(key, mod);
-    break;
+    _NOTHING
     case _INSERT_MODE:
     set_repeatable_key();
-    break;
+    _NOTHING
+    case _VISUAL_MODE_LINE:
+    visual_mode_line_loop(key, mod);
+    _NOTHING
   }  
 }
 
