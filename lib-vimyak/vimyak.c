@@ -162,12 +162,24 @@ void  _get_keys_from_queue(void) {
 void _LEDhandler(void) {
 //take care of LEDs
   if (_previous_state != _keyboard_state) {
-    if (_keyboard_state != _NORMAL_MODE) {
+    switch (_keyboard_state) {
+      case _NORMAL_MODE:
+      _kb_led_all_off();
+      break;            
+      
+      case _VISUAL_MODE_LINE:
+      case _VISUAL_MODE_CHAR:      
       _kb_led_1_set_percent(5);    
       _kb_led_1_on();
-    }
-    else { 
-      _kb_led_1_off();
+      _kb_led_3_set_percent(5);    
+      _kb_led_3_on();      
+      break;
+      
+      default:
+      _kb_led_1_set_percent(5);    
+      _kb_led_1_on();
+      _kb_led_3_off();
+      break;
     }
   }
 }
