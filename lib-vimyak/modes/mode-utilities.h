@@ -20,7 +20,7 @@ void (*_command_function)(uint8_t, uint8_t);
 void _set_command_function(void(*FunctPtr)(uint8_t, uint8_t));
 void _set_state(_STATE new_state);
 void _do_command_reset(void);
-bool (*_exit_function)(void);
+void (*_exit_function)(void);
 //end shared command functions/vars
 
 //repeater functions
@@ -36,6 +36,7 @@ void __go_soft_beginning_of_lineNONScrivener(void);
 void __go_soft_beginning_of_line(void);
 void __do_select_all_word(void);
 void __do_copy_selection(void);
+void __do_paste(void);
 void __do_delete_backwards(void);
 void __do_set_mark(void);
 void __do_swap_with_mark(void);
@@ -56,6 +57,12 @@ void __go_beginning_of_file(bool select);
 void __do_select_all_file(void); 
 //end utility functions
 
+//shared recipes
+
+//f23
+void _do_command_space(uint8_t repeater);
+
+//end shared recipes
 
 #define _NOTHING return; break;
 #define _NOTHING_RESET _do_command_reset(); return; break;

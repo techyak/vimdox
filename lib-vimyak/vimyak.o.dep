@@ -8,6 +8,7 @@ lib-vimyak/vimyak.o: lib-vimyak/vimyak.c \
  lib-vimyak/../keyboard/ergodox/layout/default--led-control.h \
  lib-vimyak/./modes/mode-utilities.h lib-vimyak/./modes/../vimyak.h \
  lib-vimyak/./modes/normal-mode.h lib-vimyak/./modes/visual-mode.h \
+ lib-vimyak/./modes/insert-mode.h \
  lib-vimyak/../lib/usb/usage-page/keyboard.h
 
 lib-vimyak/../lib-other/pjrc/usb_keyboard/usb_keyboard.h:
@@ -35,5 +36,7 @@ lib-vimyak/./modes/../vimyak.h:
 lib-vimyak/./modes/normal-mode.h:
 
 lib-vimyak/./modes/visual-mode.h:
+
+lib-vimyak/./modes/insert-mode.h:
 
 lib-vimyak/../lib/usb/usage-page/keyboard.h:

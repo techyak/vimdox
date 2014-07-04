@@ -370,13 +370,7 @@ void _do_save(uint8_t repeater) {
   
 }
 
-//f23
-void _do_command_space(uint8_t repeater) {
-	my_modifiers = 0;
-  my_modifiers |= (1<<3);
-	__do_send(KEY_Spacebar, my_modifiers);	
-  
-}
+//f23 -see shared recipes
 
 
 //f21
@@ -1021,6 +1015,11 @@ void _empty_command(uint8_t key, uint8_t mod) {
  
 		case KEY_p_P:
     switch (mod) {
+      case _L_CONTROL: //^p
+      case _R_CONTROL:
+      __do_paste();         
+      _NOTHING  
+      
       case _L_SHIFT: //P
       case _R_SHIFT:
       _command_handler(&_do_paste_previous_line);
@@ -1039,8 +1038,8 @@ void _empty_command(uint8_t key, uint8_t mod) {
     switch (mod) {
       case _NO_MOD: //r
       _command_handler(&_do_select_next_char);
-      //_exit_function = &_do_back_one_char;
       _set_state(_INSERT_MODE_RESET_AFTER_SINGLE_CHAR);
+      _exit_function = &_do_back_one_char;      
       _NOTHING
     
       default:

@@ -1,0 +1,14 @@
+lib-vimyak/modes/insert-mode.o: lib-vimyak/modes/insert-mode.c \
+ lib-vimyak/modes/./insert-mode.h lib-vimyak/modes/./mode-utilities.h \
+ lib-vimyak/modes/./../vimyak.h lib-vimyak/modes/../vimyak.h \
+ lib-vimyak/modes/../../lib/usb/usage-page/keyboard.h
+
+lib-vimyak/modes/./insert-mode.h:
+
+lib-vimyak/modes/./mode-utilities.h:
+
+lib-vimyak/modes/./../vimyak.h:
+
+lib-vimyak/modes/../vimyak.h:
+
+lib-vimyak/modes/../../lib/usb/usage-page/keyboard.h:

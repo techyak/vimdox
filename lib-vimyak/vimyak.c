@@ -12,6 +12,7 @@
 #include "./modes/mode-utilities.h"
 #include "./modes/normal-mode.h"
 #include "./modes/visual-mode.h"
+#include "./modes/insert-mode.h"
 
 //keycodes for switch
 #include "../lib/usb/usage-page/keyboard.h"
@@ -196,11 +197,17 @@ void _key_handler(uint8_t key, uint8_t mod) {
     normal_mode_loop(key, mod);
     _NOTHING
     case _INSERT_MODE:
-    set_repeatable_key();
+    case _INSERT_MODE_RESET_AFTER_SINGLE_CHAR:
+    case _INSERT_MODE_RESET_AND_CR_AFTER_SINGLE_CHAR:
+    case _INSERT_MODE_RESET_AFTER_RETURN:
+    insert_mode_loop(key, mod);
     _NOTHING
     case _VISUAL_MODE_LINE:
     visual_mode_line_loop(key, mod);
     _NOTHING
+    case _VISUAL_MODE_CHAR:
+    visual_mode_char_loop(key, mod);
+    _NOTHING      
   }  
 }
 

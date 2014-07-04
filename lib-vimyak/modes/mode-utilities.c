@@ -3,6 +3,9 @@
 #include "../../lib-other/pjrc/usb_keyboard/usb_keyboard.h"
 #include "../../lib/key-functions/public.h"
 #include "../../main.h"
+#include "./visual-mode.h"
+#include "./normal-mode.h"
+#include "./insert-mode.h"
 
 //keycodes for switch
 #include "../../lib/usb/usage-page/keyboard.h"
@@ -117,6 +120,11 @@ void _set_command_function(void(*FunctPtr)(uint8_t, uint8_t)) {
 }
 
 void _set_state(_STATE new_state) {
+  if (_exit_function != 0) {
+    (_exit_function)();
+    _exit_function = 0;
+  }
+  
   set_keyboard_state(new_state);
   switch (new_state) {
     case _NORMAL_MODE:
@@ -125,6 +133,9 @@ void _set_state(_STATE new_state) {
     case _VISUAL_MODE_LINE:
     visual_mode_line_setup();
     _NOTHING
+    case _VISUAL_MODE_CHAR:
+    visual_mode_char_setup();
+    _NOTHING      
   }
 }
 
@@ -209,6 +220,12 @@ void __do_copy_selection(void) {
   my_modifiers = 0;
   my_modifiers |= (1<<3);
   __do_send(KEY_c_C, my_modifiers);
+}
+
+void __do_paste(void) {
+  my_modifiers = 0;
+  my_modifiers |= (1<<3);
+  __do_send(KEY_v_V, my_modifiers);  
 }
 
 void __do_delete_backwards(void) {
@@ -344,3 +361,15 @@ void __do_select_all_file(void) {
   __do_send(KEY_a_A, my_modifiers);
 }
 //end utility functions
+
+
+//shared recipes
+
+//f23
+void _do_command_space(uint8_t repeater) {
+	my_modifiers = 0;
+  my_modifiers |= (1<<3);
+	__do_send(KEY_Spacebar, my_modifiers);	 
+}
+
+//end shared recipes
