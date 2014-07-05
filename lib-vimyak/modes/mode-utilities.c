@@ -324,20 +324,35 @@ void __do_insert_space(void) {
   __do_send(KEY_Spacebar, 0);
 }
 
-void __go_page_down(bool select) {
+void __go_page_down(void) {
+  my_modifiers = 0;
+  my_modifiers |= (1<<1);
+  my_modifiers |= (1<<2);  
+  my_modifiers |= (1<<3);  
+  __do_send(KEY_F13, my_modifiers);
+}
+void __go_page_up(void) {
+  my_modifiers = 0;
+  my_modifiers |= (1<<1);
+  my_modifiers |= (1<<3);  
+  __do_send(KEY_F13, my_modifiers);
+}
+
+void __go_scroll_page_down(bool select) {
   my_modifiers = 0;
   if (select) {
     my_modifiers |= (1<<1);
   }
   __do_send(KEY_PageDown, my_modifiers);  
 }
-void __go_page_up(bool select) {
+void __go_scroll_page_up(bool select) {
   my_modifiers = 0;
   if (select) {
     my_modifiers |= (1<<1);
   }
   __do_send(KEY_PageUp, my_modifiers);
 }
+
 
 void __go_end_of_file(bool select) {
   my_modifiers = 0;

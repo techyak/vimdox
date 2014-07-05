@@ -36,7 +36,7 @@ void _do_previous_word(uint8_t repeater) {
 
 //^b
 void _do_page_down(uint8_t repeater) {
-  __go_page_down(false);
+  __go_page_down();
 }
   
 
@@ -123,7 +123,7 @@ void _do_end_word(uint8_t repeater) {
 
 //^f
 void _do_page_up(uint8_t repeater) {
-  __go_page_up(false);
+  __go_page_up();
 }
 
 //G

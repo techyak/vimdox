@@ -1,0 +1,39 @@
+//     Key Modifiers
+//     ^ : Ctrl
+//     $ : Shift
+//     ~ : Option (Alt)
+//     @ : Command (Apple)
+//    # : Numeric Keypad
+
+{
+  "^@\UF70F" = (selectLine:); 
+  "~\UF70F" = (moveUpAndModifySelection:);
+  "^~\UF70F" = (moveDownAndModifySelection:);
+  
+  //scroll up and down - without moving insertion point 
+  "~@\UF710" = (scrollLineUp:);   
+  "^$~\UF710" = (scrollLineDown:);     
+  
+  //page up and page down - with moved insertion point 
+  "$@\UF710" = (pageUp:);   
+  "$~@\UF710" = (pageDown:);     
+  
+  //set and swap with mark
+  "^$\UF710" = (swapWithMark:); 
+  "^\UF710" = (setMark:);
+  
+  //select line
+  "$~\UF710" = (selectLine:); 
+  
+  //select word
+	"~\UF710" = (selectWord:);   
+  
+  //select line from soft beginning to the right end
+  "@\UF710" = (moveToBeginningOfLine:,insertText:, " \t",moveToBeginningOfLine:,moveWordRight:,setMark:,moveToBeginningOfLine:,deleteForward:,deleteForward:,swapWithMark:,moveToRightEndOfLineAndModifySelection:);
+  
+  //dd: select line and copy, then delete line, then move to soft beginning of next line down (or the current one if it's the last line)
+  "^~\UF710" = (moveToEndOfLine:, setMark:, moveToBeginningOfLine:, selectToMark:, copy:, moveLeft:, deleteToEndOfLine:, moveLeft:, deleteForward:, moveDown:,moveToBeginningOfLine:,insertText:, " \t", moveToBeginningOfLine:, moveWordRight:, setMark:, moveToBeginningOfLine:, deleteForward:, deleteForward:, swapWithMark: );
+  
+  //^: soft beginning of line      
+  "^@\UF710" = (moveToBeginningOfLine:,insertText:, " \t",moveToBeginningOfLine:,moveWordRight:,setMark:,moveToBeginningOfLine:,deleteForward:,deleteForward:,swapWithMark:);  //^ soft beginning of line
+}
