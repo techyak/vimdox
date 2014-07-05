@@ -6,36 +6,6 @@
 //keycodes for switch
 #include "../../lib/usb/usage-page/keyboard.h"
 
-/*
-
-void insert_mode_reset_and_cr_after_single_char_loop(uint8_t key, uint8_t mod) {
-  
-}
-void insert_mode_reset_and_cr_after_single_char_setup(void) {
-  
-}
- 
-void insert_mode_reset_after_single_char_loop(uint8_t key, uint8_t mod) {
-  
-}
-void insert_mode_reset_after_single_char_loop(void) {
-  
-}
-  
-  
-  
-void insert_mode_reset_after_return_loop(uint8_t key, uint8_t mod) {
-  
-}
-void insert_mode_reset_after_return_setup(void) {
-  
-}
-
-void insert_mode__setup(void) {
-  
-}
-*/
-
 
 void insert_mode_loop(uint8_t key, uint8_t mod) {
   switch (get_keyboard_state()) {

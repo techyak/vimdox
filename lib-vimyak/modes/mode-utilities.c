@@ -12,6 +12,7 @@
 
 
 //debug functions
+/*
 void __debug_it(int which)
 {
   int local_key;
@@ -110,7 +111,7 @@ void __debug_num(uint8_t num) {
   _delay_ms(MAKEFILE_DEBOUNCE_TIME);
   //}
 }
-
+*/
 //end debug functions
 
 

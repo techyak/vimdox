@@ -61,16 +61,12 @@ void _do_change_all_word(uint8_t repeater) {
   __do_select_all_word();
   __do_copy_selection();
   __do_delete_backwards();
-  
-  
 }
 
 //cw
 void _do_change_word(uint8_t repeater) {
   __do_right_word(true);
-  __do_delete_backwards();
-  
-  
+  __do_delete_backwards(); 
 }
 
 //daw
