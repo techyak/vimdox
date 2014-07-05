@@ -31,10 +31,6 @@ void _do_append_eol(uint8_t repeater) {
 
 //b
 void _do_previous_word(uint8_t repeater) {
-  //my_modifiers = 0;
-  //my_modifiers |= (1<<2);
-	//__do_send(KEY_LeftArrow, my_modifiers);
-  
   __do_left_word(false);
 }
 
@@ -1192,7 +1188,6 @@ void _empty_command(uint8_t key, uint8_t mod) {
     case KEY_Escape:
     
     set_repeatable_key();
-    //set_skip_further_commands();
     _NOTHING
     
     default:
@@ -1203,26 +1198,6 @@ void _empty_command(uint8_t key, uint8_t mod) {
 
 void normal_mode_loop(uint8_t key, uint8_t mod) {
   (*_command_function)(key, mod);
-  /*
-  switch (key) {
-    case KEY_i_I:
-    set_mode(_INSERT_MODE);
-    break;
-    case KEY_j_J:
-    __do_down(false);
-    break;   
-		
-    case KEY_DeleteBackspace:
-    case KEY_Spacebar:
-    case KEY_DeleteForward:
-    case KEY_ReturnEnter:
-    case KEY_Tab:
-    case KEY_Escape:
-    set_repeatable_key();
-    set_skip_further_commands();
-    break;
-    }
-    */
 }
 
 void normal_mode_setup(void) {

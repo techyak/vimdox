@@ -31,8 +31,8 @@
  *   the end of the current cycle (see main.c)
  */
 
-//VIMYAK incursion: I modified all keyboard_modifier_keys / keyboard_keys
-//--and replaced them with the new _temp variables. This allows me to 
+//VIMYAK incursion: I modified all keyboard_modifier_keys / keyboard_keys variables
+//--and replaced them with the new *_temp variables. This allows me to 
 //--pre-process the keys and then pass along the "approved" keypresses
 //--to the keyboard_keys array.
 

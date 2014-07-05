@@ -17,6 +17,7 @@ _keypress_message_sent
                     0x1               lib-vimyak/vimyak.o
 _exit_function      0x2               lib-vimyak/vimyak.o
 __modifier          0x1               lib-vimyak/modes/normal-mode.o
+_cmd_array          0x28              lib-vimyak/modes/mode-utilities.o
 main_layers_pressed
                     0x54              main.o
 _repeating_key      0x1               lib-vimyak/vimyak.o
@@ -33,6 +34,7 @@ _repeating_modified_key
                     0x1               lib-vimyak/vimyak.o
 _flush_keys         0x1               lib-vimyak/vimyak.o
 __key               0x1               lib-vimyak/modes/normal-mode.o
+_cmd_array_index    0x1               lib-vimyak/modes/mode-utilities.o
 _keyboard_state     0x1               lib-vimyak/vimyak.o
 main_arg_is_pressed
                     0x1               main.o
@@ -137,9 +139,15 @@ Discarded input sections
                 0x0000000000000000       0x1a lib-vimyak/modes/mode-utilities.o
  .text.__go_beginning_of_file
                 0x0000000000000000       0x1a lib-vimyak/modes/mode-utilities.o
- .rodata.CSWTCH.65
+ .text._reset_repeat
+                0x0000000000000000       0x1c lib-vimyak/modes/mode-utilities.o
+ .text._add_command
+                0x0000000000000000       0x1c lib-vimyak/modes/mode-utilities.o
+ .text._do_repeat
+                0x0000000000000000       0x50 lib-vimyak/modes/mode-utilities.o
+ .rodata.CSWTCH.69
                 0x0000000000000000        0xa lib-vimyak/modes/mode-utilities.o
- .rodata.CSWTCH.68
+ .rodata.CSWTCH.72
                 0x0000000000000000        0xa lib-vimyak/modes/mode-utilities.o
  .text          0x0000000000000000        0x0 lib-vimyak/modes/normal-mode.o
  .bss           0x0000000000000000        0x0 lib-vimyak/modes/normal-mode.o
@@ -952,7 +960,7 @@ LOAD /usr/local/Cellar/avr-gcc/4.7.2/lib/gcc/avr/4.7.2/avr5/libgcc.a
                 0x000000000080011a                _edata = .
                 0x000000000080011a                PROVIDE (__data_end, .)
 
-.bss            0x000000000080011a      0x165
+.bss            0x000000000080011a      0x18e
                 0x000000000080011a                PROVIDE (__bss_start, .)
  *(.bss)
  *(.bss*)
@@ -1008,25 +1016,27 @@ LOAD /usr/local/Cellar/avr-gcc/4.7.2/lib/gcc/avr/4.7.2/avr5/libgcc.a
                 0x0000000000800275                _keyboard_state
                 0x0000000000800276                _ignore_rest_of_keys
                 0x0000000000800277                _previous_state
- COMMON         0x0000000000800278        0x2 lib-vimyak/modes/mode-utilities.o
-                0x0000000000800278                my_modifiers
-                0x0000000000800279                _repeater
- COMMON         0x000000000080027a        0x3 lib-vimyak/modes/normal-mode.o
-                0x000000000080027a                __modifier
-                0x000000000080027b                __key
-                0x000000000080027c                repeater_index
- COMMON         0x000000000080027d        0x2 lib-vimyak/modes/visual-mode.o
-                0x000000000080027d                _visual_mode_line_count
-                0x000000000080027f                PROVIDE (__bss_end, .)
+ COMMON         0x0000000000800278       0x2b lib-vimyak/modes/mode-utilities.o
+                0x0000000000800278                _cmd_array
+                0x00000000008002a0                my_modifiers
+                0x00000000008002a1                _cmd_array_index
+                0x00000000008002a2                _repeater
+ COMMON         0x00000000008002a3        0x3 lib-vimyak/modes/normal-mode.o
+                0x00000000008002a3                __modifier
+                0x00000000008002a4                __key
+                0x00000000008002a5                repeater_index
+ COMMON         0x00000000008002a6        0x2 lib-vimyak/modes/visual-mode.o
+                0x00000000008002a6                _visual_mode_line_count
+                0x00000000008002a8                PROVIDE (__bss_end, .)
                 0x0000000000002ef6                __data_load_start = LOADADDR (.data)
                 0x0000000000002f10                __data_load_end = (__data_load_start + SIZEOF (.data))
 
-.noinit         0x000000000080027f        0x0
-                0x000000000080027f                PROVIDE (__noinit_start, .)
+.noinit         0x00000000008002a8        0x0
+                0x00000000008002a8                PROVIDE (__noinit_start, .)
  *(.noinit*)
-                0x000000000080027f                PROVIDE (__noinit_end, .)
-                0x000000000080027f                _end = .
-                0x000000000080027f                PROVIDE (__heap_start, .)
+                0x00000000008002a8                PROVIDE (__noinit_end, .)
+                0x00000000008002a8                _end = .
+                0x00000000008002a8                PROVIDE (__heap_start, .)
 
 .eeprom         0x0000000000810000        0x0
  *(.eeprom*)
@@ -1308,6 +1318,9 @@ __vector_default                                  /usr/local/Cellar/avr-gcc/4.7.
 __vectors                                         /usr/local/Cellar/avr-gcc/4.7.2/lib/gcc/avr/4.7.2/../../../../avr/lib/avr5/crtm32u4.o
 __y                                               lib-vimyak/modes/normal-mode.o
 __ya                                              lib-vimyak/modes/normal-mode.o
+_add_command                                      lib-vimyak/modes/mode-utilities.o
+_cmd_array                                        lib-vimyak/modes/mode-utilities.o
+_cmd_array_index                                  lib-vimyak/modes/mode-utilities.o
 _command_function                                 lib-vimyak/modes/visual-mode.o
                                                   lib-vimyak/modes/normal-mode.o
                                                   lib-vimyak/modes/mode-utilities.o
@@ -1353,6 +1366,7 @@ _do_paste                                         lib-vimyak/modes/normal-mode.o
 _do_paste_previous_line                           lib-vimyak/modes/normal-mode.o
 _do_previous_word                                 lib-vimyak/modes/normal-mode.o
 _do_quit                                          lib-vimyak/modes/normal-mode.o
+_do_repeat                                        lib-vimyak/modes/mode-utilities.o
 _do_save                                          lib-vimyak/modes/normal-mode.o
 _do_scroll_down                                   lib-vimyak/modes/normal-mode.o
 _do_scroll_up                                     lib-vimyak/modes/normal-mode.o
@@ -1398,6 +1412,7 @@ _repeater_addition                                lib-vimyak/modes/mode-utilitie
                                                   lib-vimyak/modes/normal-mode.o
 _repeating_key                                    lib-vimyak/vimyak.o
 _repeating_modified_key                           lib-vimyak/vimyak.o
+_reset_repeat                                     lib-vimyak/modes/mode-utilities.o
 _reset_repeater                                   lib-vimyak/modes/mode-utilities.o
                                                   lib-vimyak/modes/normal-mode.o
                                                   lib-vimyak/vimyak.o
@@ -1472,6 +1487,7 @@ keyboard_keys                                     lib-other/pjrc/usb_keyboard/us
                                                   lib-vimyak/modes/mode-utilities.o
                                                   lib-vimyak/vimyak.o
 keyboard_keys_temp                                main.o
+                                                  lib-vimyak/modes/mode-utilities.o
                                                   lib-vimyak/vimyak.o
                                                   lib/key-functions/private.o
 keyboard_leds                                     lib-other/pjrc/usb_keyboard/usb_keyboard.o
@@ -1479,6 +1495,7 @@ keyboard_modifier_keys                            lib-other/pjrc/usb_keyboard/us
                                                   lib-vimyak/modes/mode-utilities.o
                                                   lib-vimyak/vimyak.o
 keyboard_modifier_keys_temp                       main.o
+                                                  lib-vimyak/modes/mode-utilities.o
                                                   lib-vimyak/vimyak.o
                                                   lib/key-functions/private.o
 layers                                            main.o
@@ -1566,6 +1583,7 @@ usb_keyboard_send                                 lib-other/pjrc/usb_keyboard/us
 vimyak_init                                       lib-vimyak/vimyak.o
                                                   main.o
 vimyak_keyhandler                                 lib-vimyak/vimyak.o
+                                                  lib-vimyak/modes/mode-utilities.o
                                                   main.o
 visual_mode_char_loop                             lib-vimyak/modes/visual-mode.o
                                                   lib-vimyak/vimyak.o

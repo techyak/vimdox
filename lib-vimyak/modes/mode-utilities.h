@@ -6,8 +6,8 @@
 #include "../vimyak.h"
 
 //debug functions
-void __debug_it(int which);
-void __debug_num(uint8_t num);
+//void __debug_it(int which);
+//void __debug_num(uint8_t num);
 //end debug functions
 
 //keycode sending functions
@@ -58,11 +58,14 @@ void __do_select_all_file(void);
 //end utility functions
 
 //shared recipes
-
-//f23
-void _do_command_space(uint8_t repeater);
-
+void _do_command_space(uint8_t repeater); //f23
 //end shared recipes
+
+//repeat command function - under construction
+void _reset_repeat(void); 
+void _add_command(uint8_t key, uint8_t mod);
+void _do_repeat(void);
+//end repeat command functions
 
 #define _NOTHING return; break;
 #define _NOTHING_RESET _do_command_reset(); return; break;

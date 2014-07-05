@@ -36,10 +36,6 @@ bool _ignore_rest_of_keys;
 
 
 //utility functions
-//void set_mode(_STATE mode) {
-//  _keyboard_state = mode;
-//}
-
 
 _STATE get_keyboard_state(void) {
   return _keyboard_state;
@@ -61,20 +57,7 @@ void set_repeatable_key(void) {
 void set_repeatable_modified_key(void) {
   _repeating_modified_key = true;
 }
-/*
-void _do_send(uint8_t key, uint8_t modifier)
-{
-  keyboard_keys[0] = key;
-	keyboard_modifier_keys = modifier; 
-	usb_keyboard_send();
-  //_delay_ms(MAKEFILE_DEBOUNCE_TIME);
-  
-  _keypress_message_sent = true;
-  keyboard_keys[0] = 0;
-	keyboard_modifier_keys = 0;
-  //usb_keyboard_send();
-}
-*/
+
 void _handle_sending_of_keys(void) {
   if (_flush_keys) {
     for (uint8_t i=0; i<6; i++) {
@@ -98,64 +81,6 @@ void _handle_sending_of_keys(void) {
   }
   _delay_ms(MAKEFILE_DEBOUNCE_TIME);
 }
-
-/*
-uint8_t _key_queue[6]={0,0,0,0,0,0};
-uint8_t _final_key;
-uint8_t _final_key_index;
-uint8_t l = 0;
-
-void _send_remaining_keys() {
-  for (uint8_t i=0; i<6; i++) {
-    keyboard_keys[i] = keyboard_keys_temp[i];
-    keyboard_modifier_keys = keyboard_modifier_keys_temp;
-  }
-  usb_keyboard_send();
-  for (uint8_t i=0; i<6; i++) {
-    keyboard_keys[i] = 0;
-    keyboard_modifier_keys = 0;
-  }
-  _delay_ms(MAKEFILE_DEBOUNCE_TIME);  
-}
-
-void _register_key(uint8_t key, uint8_t index){
-  _final_key = key;
-  _final_key_index = index;
-}
-void  _get_final_key(void){
-  keyboard_keys_temp[_final_key_index] = _final_key;
-  _final_key = 0;
-  _final_key_index = 0;
-}
-
-void _add_to_key_queue(uint8_t key, uint8_t index) {
-  _key_queue[index] = key;  
-}
-void _flush_key_queue(void) {
-	for (uint8_t i=0; i<6; i++) {
-    keyboard_keys[i] = _key_queue[i];
-	} 
-  keyboard_modifier_keys = keyboard_modifier_keys_temp;
-  
-	usb_keyboard_send();
-  _delay_ms(MAKEFILE_DEBOUNCE_TIME);
-  
-	for (uint8_t i=0; i<6; i++) {
-    keyboard_keys[i] = 0;
-    _key_queue[i] = 0;
-	} 
-  
-	keyboard_modifier_keys = 0;
-}
-
-void  _get_keys_from_queue(void) {
-	for (uint8_t i=0; i<6; i++) {
-    keyboard_keys_temp[i] = _key_queue[i];
-    _key_queue[i] = 0;
-	} 
-}
-*/
-
 //end utility functions
 
 //LEDs
@@ -225,6 +150,8 @@ void _key_handler(uint8_t key, uint8_t mod) {
 
 void _pre_command_handler(uint8_t key, uint8_t mod) {
   //pre command handling without reference to keyboard_state
+  //_add_command(key, mod);
+  
   if (key == _RESETKEY) {
     _vimyak_reset();
     _ignore_rest_of_keys = true;    

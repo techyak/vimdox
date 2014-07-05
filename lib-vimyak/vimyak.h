@@ -34,5 +34,5 @@ void set_repeatable_modified_key(void);
 
 _STATE get_keyboard_state(void);
 void set_keyboard_state(_STATE new_state);
-  
+
 #endif

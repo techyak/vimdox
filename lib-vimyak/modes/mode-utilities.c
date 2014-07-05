@@ -373,3 +373,37 @@ void _do_command_space(uint8_t repeater) {
 }
 
 //end shared recipes
+
+
+//repeat command function
+#define _CMD_ARRAY_LENGTH 20
+uint8_t _cmd_array[_CMD_ARRAY_LENGTH][2];
+uint8_t _cmd_array_index;
+
+void _reset_repeat(void) {
+  for (uint8_t i=0; i<_CMD_ARRAY_LENGTH; i++) {
+    _cmd_array[i][0] = 0;
+    _cmd_array[i][1] = 0;    
+  }
+  _cmd_array_index = 0;
+}
+
+void _add_command(uint8_t key, uint8_t mod) {
+  _cmd_array[_cmd_array_index][0] = key;
+  _cmd_array[_cmd_array_index][1] = mod;  
+  _cmd_array_index++;
+}
+
+void _do_repeat(void) {
+  for (uint8_t i=0; i<6; i++) {
+    keyboard_keys_temp[i] = 0;
+  }
+  
+  for (uint8_t i=0; i<_cmd_array_index; i++) {
+    keyboard_keys_temp[0] = _cmd_array[i][0];
+    keyboard_modifier_keys_temp = _cmd_array[i][1]; 
+    vimyak_keyhandler();
+    __do_send(0,0);
+  }
+}
+//end repeat command functions
