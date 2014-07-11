@@ -108,8 +108,16 @@ void _do_delete_line(uint8_t repeater) {
 //dw
 void _do_delete_word(uint8_t repeater) {
   __do_right_word(true);
+  __do_copy_selection();
   __do_delete_backwards();
   
+}
+
+//d$
+void _do_delete_to_end_of_line(uint8_t repeater) {
+  __go_end_of_line(true);
+  __do_copy_selection();
+  __do_delete_backwards();
 }
 
 //e
@@ -238,7 +246,7 @@ void _do_select_next_char(uint8_t repeater) {
 }
 
 //r - exit function
-void _do_back_one_char(uint8_t repeater) {
+void _do_back_one_char(void) {
   my_modifiers = 0;
   __do_send(KEY_LeftArrow, my_modifiers);
   
@@ -519,6 +527,17 @@ void __d(uint8_t key, uint8_t mod) {
       _NOTHING_RESET
     }
     
+    case KEY_4_Dollar:
+    switch (mod) {
+      
+      case _L_SHIFT: //dw
+      case _R_SHIFT:
+      _command_handler(&_do_delete_to_end_of_line);
+      _NOTHING;
+      
+      default:
+      _NOTHING_RESET
+    } 
     
     default:
     _NOTHING_RESET
@@ -1149,7 +1168,19 @@ void _empty_command(uint8_t key, uint8_t mod) {
       _NOTHING_RESET
     }
     
-  
+    
+		case KEY_Backslash_Pipe:
+    switch (mod) {
+      
+      case _L_COMMAND: // /
+      case _R_COMMAND:      
+      set_repeatable_key();
+      _set_state(_INSERT_MODE_RESET_AFTER_RETURN);
+      _NOTHING
+    
+      default:
+      _NOTHING_RESET
+    }
     
     
 		case KEY_F23:

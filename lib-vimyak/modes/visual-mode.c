@@ -70,6 +70,36 @@ void _empty_char_command(uint8_t key, uint8_t mod) {
     __do_copy_selection();
     _set_state(_NORMAL_MODE);        
     _NOTHING
+      
+    case KEY_4_Dollar:
+    switch (mod) {
+      case _L_SHIFT: //$
+      case _R_SHIFT:
+      __go_end_of_line(true);
+      _NOTHING;
+      default:
+      _NOTHING;
+    }
+    
+    case KEY_6_Caret:
+    switch (mod) {
+      case _L_SHIFT: //^
+      case _R_SHIFT:
+      __go_beginning_of_line(true); //if ever able to fix soft-beginning add it here...
+      _NOTHING
+      default:
+      _NOTHING
+    }
+      
+		case KEY_0_RightParenthesis:
+    switch (mod) {
+      case _NO_MOD: //0
+      __go_beginning_of_line(true);
+      _NOTHING
+        
+      default:
+      _NOTHING
+      }
   }
   
 }
