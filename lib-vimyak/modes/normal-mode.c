@@ -66,6 +66,10 @@ void _do_change_all_word(uint8_t repeater) {
 //cw
 void _do_change_word(uint8_t repeater) {
   __do_right_word(true);
+  _SR_
+  __do_right_word(true);
+  _ER_
+    
   __do_delete_backwards(); 
 }
 
@@ -99,7 +103,6 @@ void _do_delete_line(uint8_t repeater) {
   _ER_
     
   __go_end_of_line(true);
-  __do_copy_selection();  
   __do_delete_backwards(); 
   __do_send(0,0); 
   __do_delete_backwards();   
@@ -107,7 +110,10 @@ void _do_delete_line(uint8_t repeater) {
 
 //dw
 void _do_delete_word(uint8_t repeater) {
+  __do_right_word(true);  
+  _SR_
   __do_right_word(true);
+  _ER_
   __do_copy_selection();
   __do_delete_backwards();
   
@@ -128,6 +134,8 @@ void _do_end_word(uint8_t repeater) {
   __do_send(KEY_RightArrow, my_modifiers);
   
 }
+
+//one two three four five
 
 //^f
 void _do_page_up(uint8_t repeater) {
@@ -310,17 +318,19 @@ void _do_copy_all_word(uint8_t repeater) {
 //yw
 void _do_copy_word(uint8_t repeater) {
   __do_right_word(true);
+  _SR_
+  __do_right_word(true);  
+  _ER_
+    
   __do_copy_selection();
   __do_left(false);
   
 }
 
 
-//@y - my personal copy selection for mouse selected text primarily
+//ys - my personal copy selection for mouse selected text primarily
 void _do_copy_selection(uint8_t repeater) {
   __do_copy_selection();  
-  
-  
 }
 
 // /
@@ -385,8 +395,10 @@ void _do_command_option_f(uint8_t repeater) {
 //nasty hack... (cough)
 uint8_t __key, __modifier;
 void _single_key_handler_hack(uint8_t repeater) {
+  __do_send(__key, __modifier);  
+  _SR_
   __do_send(__key, __modifier);
-  
+  _ER_
 }
 
 void _command_handler(void(*FunctPtr)(uint8_t)) {
@@ -591,6 +603,17 @@ void __y(uint8_t key, uint8_t mod) {
       
       case _NO_MOD: //yw
       _command_handler(&_do_copy_word);
+      _NOTHING;
+      
+      default:
+      _NOTHING_RESET
+    }
+    
+    case KEY_s_S:
+    switch (mod) {
+      
+      case _NO_MOD: //ys - Themios's personal copy for mouse selected text
+      _command_handler(&_do_copy_selection);
       _NOTHING;
       
       default:
@@ -1130,10 +1153,6 @@ void _empty_command(uint8_t key, uint8_t mod) {
     
     case KEY_y_Y:
     switch (mod) {
-      case _L_COMMAND:
-      case _R_COMMAND:
-      _command_handler(&_do_copy_selection);
-      _NOTHING
       
       case _NO_MOD: //y   
       _set_command_function(&__y);
@@ -1205,7 +1224,7 @@ void _empty_command(uint8_t key, uint8_t mod) {
     
       default:
       _NOTHING_RESET
-    }       
+    }
 		
     case KEY_DeleteBackspace:
     case KEY_Spacebar:
