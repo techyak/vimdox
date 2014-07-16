@@ -137,6 +137,7 @@ void _key_handler(uint8_t key, uint8_t mod) {
     case _INSERT_MODE_RESET_AFTER_SINGLE_CHAR:
     case _INSERT_MODE_RESET_AND_CR_AFTER_SINGLE_CHAR:
     case _INSERT_MODE_RESET_AFTER_RETURN:
+    case _INSERT_MODE_RESET_BUT_DISREGARD_CR:
     insert_mode_loop(key, mod);
     _NOTHING
     case _VISUAL_MODE_LINE:

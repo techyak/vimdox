@@ -57,10 +57,13 @@ void __go_scroll_page_up(bool select);
 void __go_end_of_file(bool select);
 void __go_beginning_of_file(bool select);
 void __do_select_all_file(void); 
+void __do_find_forward(void);
+void __do_find_backward(void);
 //end utility functions
 
 //shared recipes
 void _do_command_space(uint8_t repeater); //f23
+void _do_command_option_alt_f(uint8_t repeater); //f21
 //end shared recipes
 
 //repeat command function - under construction

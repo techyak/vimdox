@@ -10,8 +10,11 @@
 #define   _INSERT_MODE_RESET_AFTER_SINGLE_CHAR                  2
 #define   _INSERT_MODE_RESET_AFTER_RETURN                       3
 #define   _INSERT_MODE_RESET_AND_CR_AFTER_SINGLE_CHAR           4
-#define   _VISUAL_MODE_CHAR                                     5
-#define   _VISUAL_MODE_LINE                                     6
+#define   _INSERT_MODE_RESET_BUT_DISREGARD_CR                   5
+#define   _VISUAL_MODE_CHAR                                     6
+#define   _VISUAL_MODE_LINE                                     7
+
+
   
   
 #define _NO_MOD           0

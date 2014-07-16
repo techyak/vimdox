@@ -142,6 +142,22 @@ void _do_page_up(uint8_t repeater) {
   __go_page_up();
 }
 
+//exit function for f
+void _escape_and_find_char_forward(void) {
+	my_modifiers = 0;
+  __do_send(KEY_Escape, my_modifiers);
+  __do_send(0,0);
+  __do_find_forward();  
+}
+//exit function for F
+void _escape_and_find_char_backward(void) {
+	my_modifiers = 0;
+  __do_send(KEY_Escape, my_modifiers);
+  __do_send(0,0);
+  __do_find_backward();  
+}
+
+
 //G
 void _do_end_of_file(uint8_t repeater) {
   __do_select_all_file();
@@ -333,12 +349,28 @@ void _do_copy_selection(uint8_t repeater) {
   __do_copy_selection();  
 }
 
-// /
+// / + ?
 void _do_find(uint8_t repeater) {
 	my_modifiers = 0;
 	my_modifiers |= (1<<3);
 	__do_send(KEY_f_F, my_modifiers);
   
+}
+
+//escape function for: ?
+void _do_escape_and_find_backward(void) {
+	my_modifiers = 0;
+  __do_send(KEY_Escape, my_modifiers);
+  __do_send(0,0);
+  __do_find_backward();
+}
+
+//escape function for: /
+void _do_escape_and_find_forward(void) {
+	my_modifiers = 0;
+  __do_send(KEY_Escape, my_modifiers);
+  __do_send(0,0);
+  __do_find_forward();
 }
 
 //0
@@ -380,17 +412,7 @@ void _do_save(uint8_t repeater) {
   
 }
 
-//f23 -see shared recipes
-
-
-//f21
-void _do_command_option_f(uint8_t repeater) {
-	my_modifiers = 0;
-  my_modifiers |= (1<<2);  
-  my_modifiers |= (1<<3);
-	__do_send(KEY_f_F, my_modifiers);	
-  
-}
+//f23 + f21 -see shared recipes
 
 //nasty hack... (cough)
 uint8_t __key, __modifier;
@@ -912,9 +934,17 @@ void _empty_command(uint8_t key, uint8_t mod) {
       _command_handler(&_do_page_down);            
       _NOTHING;
       
+      case _L_SHIFT: //F
+      case _R_SHIFT:
+      _command_handler(&_do_find);
+      _set_state(_INSERT_MODE_RESET_AFTER_SINGLE_CHAR);      
+      _exit_function = &_escape_and_find_char_backward;
+      _NOTHING
+      
       case _NO_MOD: // f
       _command_handler(&_do_find);
-      _set_state(_INSERT_MODE_RESET_AND_CR_AFTER_SINGLE_CHAR);
+      _set_state(_INSERT_MODE_RESET_AFTER_SINGLE_CHAR);      
+      _exit_function = &_escape_and_find_char_forward;
       _NOTHING
     
       default:
@@ -1086,7 +1116,7 @@ void _empty_command(uint8_t key, uint8_t mod) {
       case _R_SHIFT:
       _command_handler(&_do_change_line);
       _set_state(_INSERT_MODE);
-      break;
+      _NOTHING      
       
       case _NO_MOD: //s
       _command_handler(&_subst_char);
@@ -1165,10 +1195,18 @@ void _empty_command(uint8_t key, uint8_t mod) {
 
 		case KEY_Slash_Question:
     switch (mod) {
+      case _L_SHIFT: //?
+      case _R_SHIFT:
+      _command_handler(&_do_find);
+      _set_state(_INSERT_MODE_RESET_BUT_DISREGARD_CR);
+      _exit_function = &_do_escape_and_find_backward;                  
+      _NOTHING
+      
       
       case _NO_MOD: // /
       _command_handler(&_do_find);
-      _set_state(_INSERT_MODE_RESET_AFTER_RETURN);
+      _set_state(_INSERT_MODE_RESET_BUT_DISREGARD_CR);
+      _exit_function = &_do_escape_and_find_forward;            
       _NOTHING
     
       default:
@@ -1218,7 +1256,7 @@ void _empty_command(uint8_t key, uint8_t mod) {
     switch (mod) {
       
       case _NO_MOD: // /
-      _command_handler(&_do_command_option_f);
+      _command_handler(&_do_command_option_alt_f);
       _set_state(_INSERT_MODE_RESET_AFTER_RETURN);
       _NOTHING
     

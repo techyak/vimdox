@@ -33,6 +33,19 @@ void insert_mode_loop(uint8_t key, uint8_t mod) {
       _set_state(_NORMAL_MODE);
       _NOTHING      
     }
+
+    //this is an attempt to get VIM results from searching
+    //which is constantly messed up by not finding the result
+    //that you searched for. This approach we disregard the CR
+    //and then send an escape key to remove the find window
+    //then we do a "find next" on the text that was entered
+    case _INSERT_MODE_RESET_BUT_DISREGARD_CR:
+    if (key == KEY_ReturnEnter) {
+      set_clear_buffer();
+      _set_state(_NORMAL_MODE);
+      _NOTHING      
+    }
+    
     
     default:
     switch (key) {
@@ -49,9 +62,21 @@ void insert_mode_loop(uint8_t key, uint8_t mod) {
         _NOTHING
       }
       
+  		case KEY_F21:
+      switch (mod) {
+        case _NO_MOD:
+        _command_handler(&_do_command_option_alt_f);
+        _set_state(_INSERT_MODE_RESET_AFTER_RETURN);
+        _NOTHING
+    
+        default:
+        _NOTHING_RESET
+      }
+      
+      
   		case KEY_F23:
       switch (mod) {
-        case _NO_MOD: // /
+        case _NO_MOD:
         _do_command_space(0);
         _set_state(_INSERT_MODE_RESET_AFTER_RETURN);
         _NOTHING

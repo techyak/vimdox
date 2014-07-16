@@ -376,6 +376,20 @@ void __do_select_all_file(void) {
   my_modifiers |= (1<<3);
   __do_send(KEY_a_A, my_modifiers);
 }
+
+void __do_find_forward(void) {
+	my_modifiers = 0;
+	my_modifiers |= (1<<3);
+	__do_send(KEY_g_G, my_modifiers);  
+}
+
+void __do_find_backward(void) {
+	my_modifiers = 0;
+	my_modifiers |= (1<<3);
+	my_modifiers |= (1<<1);
+	__do_send(KEY_g_G, my_modifiers);  
+}
+
 //end utility functions
 
 
@@ -387,6 +401,16 @@ void _do_command_space(uint8_t repeater) {
   my_modifiers |= (1<<3);
 	__do_send(KEY_Spacebar, my_modifiers);	 
 }
+
+//f21
+void _do_command_option_alt_f(uint8_t repeater) {
+	my_modifiers = 0;
+  my_modifiers |= (1<<0);  
+  my_modifiers |= (1<<2);    
+  my_modifiers |= (1<<3);
+	__do_send(KEY_f_F, my_modifiers);	
+}
+
 
 //end shared recipes
 
