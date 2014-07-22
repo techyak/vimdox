@@ -46,6 +46,11 @@ void _empty_char_command(uint8_t key, uint8_t mod) {
     set_repeatable_modified_key();             
     _NOTHING
 
+    case KEY_i_I: //non-vim behavior: move to insert mode without removing highlighting
+    _exit_function = 0;
+    _set_state(_INSERT_MODE);            
+    _NOTHING      
+
     case KEY_j_J:
     __do_down(true);
     set_repeatable_modified_key();             
@@ -120,6 +125,11 @@ void visual_mode_char_setup(void) {
 
 void _empty_line_command(uint8_t key, uint8_t mod) {
 	switch (key) {
+    case KEY_i_I: //non-vim behavior: move to insert mode without removing highlighting
+    _exit_function = 0;
+    _set_state(_INSERT_MODE);            
+    _NOTHING      
+    
     case KEY_j_J:
     _visual_mode_line_count--;
     __do_down(true);

@@ -1263,6 +1263,17 @@ void _empty_command(uint8_t key, uint8_t mod) {
       default:
       _NOTHING_RESET
     }
+    
+    case KEY_F24: //should never get here without modifier keys pressed
+    switch (mod) {
+      case _L_SHIFT:
+      case _R_SHIFT:
+      _command_handler(&_do_command_alt_f);
+      _NOTHING
+      
+      default:
+      _NOTHING_RESET
+    }
 		
     case KEY_DeleteBackspace:
     case KEY_Spacebar:

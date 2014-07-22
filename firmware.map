@@ -327,7 +327,7 @@ LOAD /usr/local/Cellar/avr-gcc/4.7.2/lib/gcc/avr/4.7.2/avr5/libgcc.a
 .rela.plt
  *(.rela.plt)
 
-.text           0x0000000000000000     0x3076
+.text           0x0000000000000000     0x3092
  *(.vectors)
  .vectors       0x0000000000000000       0xac /usr/local/Cellar/avr-gcc/4.7.2/lib/gcc/avr/4.7.2/../../../../avr/lib/avr5/crtm32u4.o
                 0x0000000000000000                __vectors
@@ -882,34 +882,34 @@ LOAD /usr/local/Cellar/avr-gcc/4.7.2/lib/gcc/avr/4.7.2/avr5/libgcc.a
                 0x0000000000002ed0        0x2 lib-vimyak/modes/visual-mode.o
                 0x0000000000002ed0                _do_visual_mode_exit_function
  .text._empty_line_command
-                0x0000000000002ed2       0x8e lib-vimyak/modes/visual-mode.o
+                0x0000000000002ed2       0x9a lib-vimyak/modes/visual-mode.o
                 0x0000000000002ed2                _empty_line_command
  .text._empty_char_command
-                0x0000000000002f60       0x9c lib-vimyak/modes/visual-mode.o
-                0x0000000000002f60                _empty_char_command
+                0x0000000000002f6c       0xac lib-vimyak/modes/visual-mode.o
+                0x0000000000002f6c                _empty_char_command
  .text._visual_mode_reset
-                0x0000000000002ffc        0xa lib-vimyak/modes/visual-mode.o
-                0x0000000000002ffc                _visual_mode_reset
+                0x0000000000003018        0xa lib-vimyak/modes/visual-mode.o
+                0x0000000000003018                _visual_mode_reset
  .text.visual_mode_char_loop
-                0x0000000000003006        0xa lib-vimyak/modes/visual-mode.o
-                0x0000000000003006                visual_mode_char_loop
+                0x0000000000003022        0xa lib-vimyak/modes/visual-mode.o
+                0x0000000000003022                visual_mode_char_loop
  .text.visual_mode_char_setup
-                0x0000000000003010       0x20 lib-vimyak/modes/visual-mode.o
-                0x0000000000003010                visual_mode_char_setup
+                0x000000000000302c       0x20 lib-vimyak/modes/visual-mode.o
+                0x000000000000302c                visual_mode_char_setup
  .text.visual_mode_line_loop
-                0x0000000000003030        0xa lib-vimyak/modes/visual-mode.o
-                0x0000000000003030                visual_mode_line_loop
+                0x000000000000304c        0xa lib-vimyak/modes/visual-mode.o
+                0x000000000000304c                visual_mode_line_loop
  .text.visual_mode_line_setup
-                0x000000000000303a       0x2c lib-vimyak/modes/visual-mode.o
-                0x000000000000303a                visual_mode_line_setup
- .text.libgcc   0x0000000000003066        0xc /usr/local/Cellar/avr-gcc/4.7.2/lib/gcc/avr/4.7.2/avr5/libgcc.a(_tablejump.o)
-                0x0000000000003066                __tablejump2__
-                0x000000000000306a                __tablejump__
-                0x0000000000003072                . = ALIGN (0x2)
+                0x0000000000003056       0x2c lib-vimyak/modes/visual-mode.o
+                0x0000000000003056                visual_mode_line_setup
+ .text.libgcc   0x0000000000003082        0xc /usr/local/Cellar/avr-gcc/4.7.2/lib/gcc/avr/4.7.2/avr5/libgcc.a(_tablejump.o)
+                0x0000000000003082                __tablejump2__
+                0x0000000000003086                __tablejump__
+                0x000000000000308e                . = ALIGN (0x2)
  *(.fini9)
- .fini9         0x0000000000003072        0x0 /usr/local/Cellar/avr-gcc/4.7.2/lib/gcc/avr/4.7.2/avr5/libgcc.a(_exit.o)
-                0x0000000000003072                exit
-                0x0000000000003072                _exit
+ .fini9         0x000000000000308e        0x0 /usr/local/Cellar/avr-gcc/4.7.2/lib/gcc/avr/4.7.2/avr5/libgcc.a(_exit.o)
+                0x000000000000308e                exit
+                0x000000000000308e                _exit
  *(.fini9)
  *(.fini8)
  *(.fini8)
@@ -928,11 +928,11 @@ LOAD /usr/local/Cellar/avr-gcc/4.7.2/lib/gcc/avr/4.7.2/avr5/libgcc.a
  *(.fini1)
  *(.fini1)
  *(.fini0)
- .fini0         0x0000000000003072        0x4 /usr/local/Cellar/avr-gcc/4.7.2/lib/gcc/avr/4.7.2/avr5/libgcc.a(_exit.o)
+ .fini0         0x000000000000308e        0x4 /usr/local/Cellar/avr-gcc/4.7.2/lib/gcc/avr/4.7.2/avr5/libgcc.a(_exit.o)
  *(.fini0)
-                0x0000000000003076                _etext = .
+                0x0000000000003092                _etext = .
 
-.data           0x0000000000800100       0x1a load address 0x0000000000003076
+.data           0x0000000000800100       0x1a load address 0x0000000000003092
                 0x0000000000800100                PROVIDE (__data_start, .)
  *(.data)
  .data          0x0000000000800100        0x0 /usr/local/Cellar/avr-gcc/4.7.2/lib/gcc/avr/4.7.2/../../../../avr/lib/avr5/crtm32u4.o
@@ -1046,8 +1046,8 @@ LOAD /usr/local/Cellar/avr-gcc/4.7.2/lib/gcc/avr/4.7.2/avr5/libgcc.a
  COMMON         0x00000000008002a6        0x2 lib-vimyak/modes/visual-mode.o
                 0x00000000008002a6                _visual_mode_line_count
                 0x00000000008002a8                PROVIDE (__bss_end, .)
-                0x0000000000003076                __data_load_start = LOADADDR (.data)
-                0x0000000000003090                __data_load_end = (__data_load_start + SIZEOF (.data))
+                0x0000000000003092                __data_load_start = LOADADDR (.data)
+                0x00000000000030ac                __data_load_end = (__data_load_start + SIZEOF (.data))
 
 .noinit         0x00000000008002a8        0x0
                 0x00000000008002a8                PROVIDE (__noinit_start, .)

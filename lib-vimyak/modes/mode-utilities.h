@@ -64,6 +64,7 @@ void __do_find_backward(void);
 //shared recipes
 void _do_command_space(uint8_t repeater); //f23
 void _do_command_option_alt_f(uint8_t repeater); //f21
+void _do_command_alt_f(uint8_t repeater); //shift f24
 //end shared recipes
 
 //repeat command function - under construction

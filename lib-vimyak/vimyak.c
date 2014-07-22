@@ -23,6 +23,7 @@
 //--VIM because escape is used for a lot of other things in the OS
 //--therefore I had decided to use F24 as my escape key. Modify this if you'd like
 #define _RESETKEY         KEY_F24
+#define _RESETMOD         0
 
 _STATE _keyboard_state;
 _STATE _previous_state;
@@ -153,7 +154,7 @@ void _pre_command_handler(uint8_t key, uint8_t mod) {
   //pre command handling without reference to keyboard_state
   //_add_command(key, mod);
   
-  if (key == _RESETKEY) {
+  if ((key == _RESETKEY) && (mod == _RESETMOD)) {
     _vimyak_reset();
     _ignore_rest_of_keys = true;    
   }

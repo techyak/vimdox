@@ -411,6 +411,13 @@ void _do_command_option_alt_f(uint8_t repeater) {
 	__do_send(KEY_f_F, my_modifiers);	
 }
 
+//shift f24
+void _do_command_alt_f(uint8_t repeater) { 
+  my_modifiers = 0;
+  my_modifiers |= (1<<2);    
+  my_modifiers |= (1<<3);
+	__do_send(KEY_f_F, my_modifiers);	
+}
 
 //end shared recipes
 
@@ -446,4 +453,6 @@ void _do_repeat(void) {
     __do_send(0,0);
   }
 }
+
+
 //end repeat command functions
