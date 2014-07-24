@@ -38,6 +38,7 @@ void __do_select_all_word(void);
 void __do_copy_selection(void);
 void __do_paste(void);
 void __do_delete_backwards(void);
+void __do_delete_forward(void);
 void __do_set_mark(void);
 void __do_swap_with_mark(void);
 void __do_select_line(void);

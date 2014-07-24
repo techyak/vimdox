@@ -234,6 +234,11 @@ void __do_delete_backwards(void) {
   __do_send(KEY_DeleteBackspace, my_modifiers);  
 }
 
+void __do_delete_forward(void) {
+  my_modifiers = 0;
+  __do_send(KEY_DeleteForward, my_modifiers);
+}
+
 void __do_set_mark(void) {
   my_modifiers = 0;
   my_modifiers |= (1<<0);

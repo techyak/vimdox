@@ -1240,21 +1240,8 @@ void _empty_command(uint8_t key, uint8_t mod) {
     }
     
     
-		case KEY_F23:
+    case KEY_F15:
     switch (mod) {
-      
-      case _NO_MOD: // /
-      _command_handler(&_do_command_space);
-      _set_state(_INSERT_MODE_RESET_AFTER_RETURN);
-      _NOTHING
-    
-      default:
-      _NOTHING_RESET
-    }    
-    
-		case KEY_F21:
-    switch (mod) {
-      
       case _NO_MOD: // /
       _command_handler(&_do_command_option_alt_f);
       _set_state(_INSERT_MODE_RESET_AFTER_RETURN);
@@ -1264,20 +1251,35 @@ void _empty_command(uint8_t key, uint8_t mod) {
       _NOTHING_RESET
     }
     
-    case KEY_F24: //should never get here without modifier keys pressed
+    case KEY_F24: 
     switch (mod) {
       case _L_SHIFT:
       case _R_SHIFT:
       _command_handler(&_do_command_alt_f);
       _NOTHING
       
+      case _NO_MOD: // /
+      _command_handler(&_do_command_space);
+      _set_state(_INSERT_MODE_RESET_AFTER_RETURN);
+      _NOTHING
+        
       default:
       _NOTHING_RESET
     }
-		
+    
     case KEY_DeleteBackspace:
+    switch (mod) {
+      case _L_SHIFT:
+      case _R_SHIFT:
+      __do_delete_forward();
+      _NOTHING
+      
+      default:
+      set_repeatable_key();
+      _NOTHING
+    }
+    	
     case KEY_Spacebar:
-    case KEY_DeleteForward:
     case KEY_ReturnEnter:
     case KEY_Tab:
     case KEY_Escape:

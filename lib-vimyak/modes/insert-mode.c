@@ -45,8 +45,7 @@ void insert_mode_loop(uint8_t key, uint8_t mod) {
       _set_state(_NORMAL_MODE);
       _NOTHING      
     }
-    
-    
+        
     default:
     switch (key) {
       case KEY_p_P:
@@ -62,9 +61,23 @@ void insert_mode_loop(uint8_t key, uint8_t mod) {
         _NOTHING
       }
       
-  		case KEY_F21:
+      case KEY_DeleteBackspace:
       switch (mod) {
-        case _NO_MOD:
+        case _L_SHIFT:
+        case _R_SHIFT:
+        __do_delete_forward();
+        _NOTHING
+        
+        default:
+        set_repeatable_key();
+        _NOTHING
+      }
+      
+    
+             
+      case KEY_F15:
+      switch (mod) {
+        case _NO_MOD: // /
         _command_handler(&_do_command_option_alt_f);
         _set_state(_INSERT_MODE_RESET_AFTER_RETURN);
         _NOTHING
@@ -72,26 +85,19 @@ void insert_mode_loop(uint8_t key, uint8_t mod) {
         default:
         _NOTHING_RESET
       }
-      
-      
-  		case KEY_F23:
-      switch (mod) {
-        case _NO_MOD:
-        _do_command_space(0);
-        _set_state(_INSERT_MODE_RESET_AFTER_RETURN);
-        _NOTHING
     
-        default:
-        _NOTHING_RESET
-      }      
-      
-      case KEY_F24: //should never get here without modifier keys pressed
+      case KEY_F24: 
       switch (mod) {
         case _L_SHIFT:
         case _R_SHIFT:
         _command_handler(&_do_command_alt_f);
         _NOTHING
       
+        case _NO_MOD: // /
+        _command_handler(&_do_command_space);
+        _set_state(_INSERT_MODE_RESET_AFTER_RETURN);
+        _NOTHING
+        
         default:
         _NOTHING_RESET
       }
