@@ -94,16 +94,16 @@ void _LEDhandler(void) {
       
       case _VISUAL_MODE_LINE:
       case _VISUAL_MODE_CHAR:      
-      _kb_led_1_set_percent(5);    
-      _kb_led_1_on();
+      _kb_led_2_set_percent(5);    
+      _kb_led_2_on();
       _kb_led_3_set_percent(5);    
       _kb_led_3_on();      
       break;
       
       default:
-      _kb_led_1_set_percent(5);    
-      _kb_led_1_on();
-      _kb_led_3_off();
+      _kb_led_3_set_percent(5);    
+      _kb_led_3_on();
+      _kb_led_2_off();
       break;
     }
   }

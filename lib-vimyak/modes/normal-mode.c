@@ -1239,6 +1239,18 @@ void _empty_command(uint8_t key, uint8_t mod) {
       _NOTHING_RESET
     }
     
+		case KEY_Dash_Underscore:
+    switch (mod) {
+      
+      case _L_COMMAND: // /
+      case _R_COMMAND:      
+      _do_command_dash(0);
+      //_set_state(_INSERT_MODE_RESET_AFTER_RETURN);
+      _NOTHING
+    
+      default:
+      _NOTHING_RESET
+    }    
     
     case KEY_F15:
     switch (mod) {
@@ -1272,6 +1284,7 @@ void _empty_command(uint8_t key, uint8_t mod) {
       case _L_SHIFT:
       case _R_SHIFT:
       __do_delete_forward();
+      set_repeatable_modified_key();            
       _NOTHING
       
       default:

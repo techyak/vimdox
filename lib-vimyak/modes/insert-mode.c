@@ -66,6 +66,7 @@ void insert_mode_loop(uint8_t key, uint8_t mod) {
         case _L_SHIFT:
         case _R_SHIFT:
         __do_delete_forward();
+        set_repeatable_modified_key();                    
         _NOTHING
         
         default:
@@ -73,7 +74,19 @@ void insert_mode_loop(uint8_t key, uint8_t mod) {
         _NOTHING
       }
       
+  		case KEY_Dash_Underscore:
+      switch (mod) {
+      
+        case _L_COMMAND: // <cmd>-
+        case _R_COMMAND:      
+        _do_command_dash(0);
+        _set_state(_NORMAL_MODE);
+        _NOTHING
     
+        default:
+        set_repeatable_key();        
+        _NOTHING
+      }    
              
       case KEY_F15:
       switch (mod) {
@@ -83,7 +96,7 @@ void insert_mode_loop(uint8_t key, uint8_t mod) {
         _NOTHING
     
         default:
-        _NOTHING_RESET
+        _NOTHING
       }
     
       case KEY_F24: 
@@ -99,7 +112,7 @@ void insert_mode_loop(uint8_t key, uint8_t mod) {
         _NOTHING
         
         default:
-        _NOTHING_RESET
+        _NOTHING
       }
       
       
